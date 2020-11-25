@@ -32,7 +32,27 @@ Para cada valor de *N* lido do arquivo *entrada.txt*:
 ### Parte II
 #### Implementação dos Autores mais Frequentes :bar_chart:
 
+Implementar um programa que leia N livros aleatórios e diferentes e conte quantas vezes um mesmo autor se repete dentro desses N livros por meio de uma tabela Hash e imprimir os autores mais frequentes.
+
+- [x] Tabela Hash de Registros
+- [x] tabela Hash de Autores
+
+
 ### Parte III
 #### Busca em Estruturas Balanceadas e Auto-Ajustáveis :bookmark:
 
+Você deverá avaliar o desempenho de estruturas balanceadas ao inserir um livro usando como chave o id do livro. Você também deverá analisar o desempenho dessas estruturas ao realizar a busca pelo livro. As estruturas que devem ser avaliadas são:
 
+- [x] Árvore Vermelho-Preto
+- [x] Árvore B (d=2)
+- [x] Árvore B (d=20)
+
+Para cada valor de N lido do arquivo de entrada:
+
+- [x] Gera cada um dos conjuntos de elementos, constrói a árvore, contabiliza estatísticas de desempenho para inserção na árvore analisada.
+- [x] Armazena estatísticas de desempenho em arquivo de saída (saidaInsercao.txt).
+- [x] Realiza a busca na árvore gerada pelas entradas da inserção, contabiliza estatísticas de desempenho para busca na árvore analisada.
+- [x] Armazena estatísticas de desempenho em arquivo de saída (saidaBusca.txt).
+
+Ao final, basta processar os arquivos de saída referentes a cada uma das sementes, calculando as médias de cada estatística, para cada valor de N e para cada estrutura de
+dados considerados.
