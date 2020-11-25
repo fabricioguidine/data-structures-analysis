@@ -4,9 +4,9 @@ Repositório do trabalho de Estrutura de Dados (DCC012) do Depto de Ciência da 
 
 ## Book Depository Dataset :closed_book:
 
-O conjunto de dados (registros) em *.csv* está disponível em [Kaggle](https://www.kaggle.com/sp1thas/book-depository-dataset). É necessário fazer o *download* do arquivo para executar o programa e deixá-lo na pasta do projeto para poder rodá-lo.
+O conjunto de dados (registros) em *.csv* está disponível em [Kaggle](https://www.kaggle.com/sp1thas/book-depository-dataset). É necessário fazer o *download* do arquivo para executar o programa e deixá-lo na pasta do projeto para poder rodá-lo. Você pode encontrá-lo em [Google Drive](https://drive.google.com/file/d/1Iy7PVAZdvuUFuK3FiepMJVy2TkX_qY2H/view?usp=sharing).
 
-**Observação**: Para rodar o programa, além do *DataSet* estar no diretório, o arquivo de entrada especificado na descrição do trabalho também deve estar, *entrada.txt*. Para rodar via terminal no Linux basta baixar o Trabalho 01, 02 ou 03 do repositório e executar o comando:
+**Observação**: Para rodar o programa, além do *DataSet* estar no diretório, o arquivo de entrada especificado na descrição do trabalho também deve estar, *entrada.txt*. Para rodar via terminal no Linux basta baixar o Trabalho 01, 02 ou 03 com a extenção *.jar do repositório de cada parte e executar o comando:
 
 ```java -jar Trabalho01.jar```, ```java -jar Trabalho02.jar``` ou ```java -jar Trabalho03.jar```.
 
