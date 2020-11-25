@@ -30,9 +30,9 @@ Para cada valor de *N* lido do arquivo *entrada.txt*:
 - [x] Armazena estatísticas de desempenho em arquivo de saída (*saida.txt*).
 
 ### Parte II
-:wrench: *Em desenvolvimento.*
 #### Implementação dos Autores mais Frequentes :bar_chart:
 
+### Parte III
 #### Busca em Estruturas Balanceadas e Auto-Ajustáveis :bookmark:
 
 
