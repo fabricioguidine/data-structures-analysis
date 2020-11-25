@@ -49,10 +49,10 @@ Você deverá avaliar o desempenho de estruturas balanceadas ao inserir um livro
 
 Para cada valor de N lido do arquivo de entrada:
 
-- [x] Gera cada um dos conjuntos de elementos, constrói a árvore, contabiliza estatísticas de desempenho para inserção na árvore analisada.
-- [x] Armazena estatísticas de desempenho em arquivo de saída (saidaInsercao.txt).
-- [x] Realiza a busca na árvore gerada pelas entradas da inserção, contabiliza estatísticas de desempenho para busca na árvore analisada.
-- [x] Armazena estatísticas de desempenho em arquivo de saída (saidaBusca.txt).
+* Gera cada um dos conjuntos de elementos, constrói a árvore, contabiliza estatísticas de desempenho para inserção na árvore analisada.
+* Armazena estatísticas de desempenho em arquivo de saída (saidaInsercao.txt).
+* Realiza a busca na árvore gerada pelas entradas da inserção, contabiliza estatísticas de desempenho para busca na árvore analisada.
+* Armazena estatísticas de desempenho em arquivo de saída (saidaBusca.txt).
 
 Ao final, basta processar os arquivos de saída referentes a cada uma das sementes, calculando as médias de cada estatística, para cada valor de N e para cada estrutura de
 dados considerados.
