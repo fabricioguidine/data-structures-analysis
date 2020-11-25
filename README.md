@@ -35,7 +35,7 @@ Para cada valor de *N* lido do arquivo *entrada.txt*:
 Implementar um programa que leia N livros aleatórios e diferentes e conte quantas vezes um mesmo autor se repete dentro desses N livros por meio de uma tabela Hash e imprimir os autores mais frequentes.
 
 - [x] Tabela Hash de Registros
-- [x] tabela Hash de Autores
+- [x] Tabela Hash de Autores
 
 
 ### Parte III
