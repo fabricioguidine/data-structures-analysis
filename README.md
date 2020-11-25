@@ -8,7 +8,7 @@ O conjunto de dados (registros) em *.csv* está disponível em [Kaggle](https://
 
 **Observação**: Para rodar o programa, além do *DataSet* estar no diretório, o arquivo de entrada especificado na descrição do trabalho também deve estar, *entrada.txt*. Para rodar via terminal no Linux basta baixar o Trabalho 01, 02 ou 03 do repositório e executar o comando:
 
-```java -jar Trabalho01.jar```
+```java -jar Trabalho01.jar``` ou Trabalho02/Trabalho03.
 
 ### Parte I
 
