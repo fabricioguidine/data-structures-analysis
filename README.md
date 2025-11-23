@@ -201,6 +201,11 @@ This project is for educational purposes.
 - Fabrício Guidine
 - Walkíria Garcia
 
+## Documentation
+
+The original project specification (in Portuguese) can be found in:
+- [`Trabalho 1 e 2 (2020.1) - ERE.pdf`](Trabalho%201%20e%202%20(2020.1)%20-%20ERE.pdf) - Project specification document
+
 ## Acknowledgments
 
 - Dataset provided by [Book Depository on Kaggle](https://www.kaggle.com/sp1thas/book-depository-dataset)
