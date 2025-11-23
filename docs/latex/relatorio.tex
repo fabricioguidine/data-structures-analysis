@@ -1,0 +1,298 @@
+% Relatório Técnico - Análise de Estruturas de Dados
+% Análise de Algoritmos de Ordenação, Tabelas Hash e Árvores Balanceadas
+% Dataset: Book Depository
+
+\documentclass[
+    12pt,
+    a4paper,
+    openright,
+    oneside,
+    english,
+    brazil,
+    sumario=tradicional
+]{abntex2}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+% Configuration
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% PDF Metadata
+\hypersetup{
+    pdftitle={Análise de Estruturas de Dados - Book Depository Dataset},
+    pdfauthor={Equipe do Projeto},
+    pdfsubject={Análise de Algoritmos e Estruturas de Dados},
+    pdfkeywords={algoritmos, estruturas de dados, ordenação, hash tables, árvores balanceadas},
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+% Document Information
+\titulo{Análise de Estruturas de Dados e Algoritmos\\
+Utilizando o Dataset Book Depository}
+\autor{Débora Duarte\\Fabrício Guidine\\Walkíria Garcia}
+\local{Juiz de Fora}
+\data{\today}
+\instituicao{%
+Universidade Federal de Juiz de Fora
+\par
+Departamento de Ciência da Computação
+\par
+DCC012 - Estruturas de Dados II
+}
+\tipotrabalho{Trabalho de Disciplina}
+
+% Index
+\makeindex
+
+\begin{document}
+
+% Front Matter
+\pretextual
+\imprimircapa
+\imprimirfolhaderosto
+
+\begin{resumo}
+Este trabalho apresenta uma análise comparativa de algoritmos de ordenação, implementação de tabelas hash e avaliação de estruturas de dados balanceadas utilizando o dataset Book Depository. Os experimentos avaliam o desempenho dos algoritmos QuickSort e HeapSort, implementam tabelas hash para identificar autores mais frequentes e comparam o desempenho de árvores Vermelho-Preto e B+ em operações de inserção e busca. Os resultados demonstram as características de cada estrutura de dados e algoritmo, fornecendo insights sobre sua aplicabilidade em diferentes cenários.
+\end{resumo}
+
+\palavraschave{algoritmos de ordenação, tabelas hash, árvores balanceadas, análise de desempenho, estruturas de dados}
+
+\listoffigures
+\listoftables
+\sumario
+
+% Main Content
+\textual
+
+\chapter{Introdução}
+
+Este relatório apresenta uma análise completa de estruturas de dados e algoritmos fundamentais em Ciência da Computação, utilizando o dataset Book Depository como base de dados para os experimentos realizados.
+
+\section{Contexto}
+
+O projeto foi desenvolvido como parte dos requisitos da disciplina DCC012 - Estruturas de Dados II, do Departamento de Ciência da Computação da Universidade Federal de Juiz de Fora, no semestre 2020.1.
+
+\section{Objetivos}
+
+Os principais objetivos deste trabalho incluem:
+
+\begin{itemize}
+    \item Implementar e analisar algoritmos de ordenação (QuickSort e HeapSort)
+    \item Implementar tabelas hash para análise de frequência de autores
+    \item Avaliar o desempenho de estruturas de dados balanceadas (Árvore Vermelho-Preto e Árvore B+)
+    \item Comparar métricas de desempenho entre diferentes estruturas e algoritmos
+    \item Gerar resultados empíricos através de experimentos controlados
+\end{itemize}
+
+\section{Organização do Relatório}
+
+Este relatório está organizado da seguinte forma:
+
+\begin{itemize}
+    \item \textbf{Capítulo 2}: Revisão bibliográfica sobre as estruturas e algoritmos estudados
+    \item \textbf{Capítulo 3}: Metodologia e descrição dos experimentos
+    \item \textbf{Capítulo 4}: Análise de algoritmos de ordenação
+    \item \textbf{Capítulo 5}: Análise de tabelas hash
+    \item \textbf{Capítulo 6}: Análise de estruturas de dados balanceadas
+    \item \textbf{Capítulo 7}: Resultados e discussão
+    \item \textbf{Capítulo 8}: Conclusões e trabalhos futuros
+\end{itemize}
+
+\chapter{Revisão Bibliográfica}
+
+\section{Algoritmos de Ordenação}
+
+\subsection{QuickSort}
+
+O QuickSort é um algoritmo de ordenação eficiente que utiliza a estratégia de divisão e conquista...
+
+\subsection{HeapSort}
+
+O HeapSort utiliza a propriedade de heap para ordenar elementos...
+
+\section{Tabelas Hash}
+
+As tabelas hash são estruturas de dados que permitem acesso rápido a elementos através de funções de hash...
+
+\section{Estruturas de Dados Balanceadas}
+
+\subsection{Árvore Vermelho-Preto}
+
+Árvores Vermelho-Preto são árvores binárias de busca auto-equilibradas...
+
+\subsection{Árvore B+}
+
+Árvores B+ são estruturas de dados otimizadas para armazenamento em disco...
+
+\chapter{Metodologia}
+
+\section{Dataset}
+
+O dataset Book Depository foi obtido do Kaggle e contém informações sobre livros, incluindo:
+
+\begin{itemize}
+    \item Dados de autores e suas obras
+    \item Informações sobre livros (título, ISBN, categorias)
+    \item Rankings de bestsellers
+    \item Avaliações e classificações
+\end{itemize}
+
+\section{Métricas de Desempenho}
+
+Para cada algoritmo e estrutura de dados, foram medidos:
+
+\begin{itemize}
+    \item \textbf{Número de comparações}: Quantidade de comparações entre elementos
+    \item \textbf{Número de trocas/cópias}: Quantidade de operações de movimentação de dados
+    \item \textbf{Tempo de execução}: Tempo total de processamento em milissegundos
+\end{itemize}
+
+\section{Ambiente de Execução}
+
+Os experimentos foram executados em:
+\begin{itemize}
+    \item Linguagem: Java
+    \item Ambiente: JVM (Java Virtual Machine)
+    \item Sistema operacional: Windows/Linux
+    \item Métricas: Tempo de máquina (não tempo de relógio)
+\end{itemize}
+
+\chapter{Análise de Algoritmos de Ordenação}
+
+\section{Metodologia dos Experimentos}
+
+Os experimentos de ordenação foram realizados com diferentes tamanhos de entrada...
+
+\section{Resultados}
+
+% Placeholder for results from tests/sorting/
+
+\subsection{QuickSort}
+
+% Include results from tests/sorting/quicksort_results.txt
+
+\subsection{HeapSort}
+
+% Include results from tests/sorting/heapsort_results.txt
+
+\section{Análise Comparativa}
+
+\chapter{Análise de Tabelas Hash}
+
+\section{Implementação}
+
+As tabelas hash foram implementadas utilizando endereçamento aberto com double hashing...
+
+\section{Resultados}
+
+% Placeholder for results from tests/hashtable/
+
+\section{Análise de Autores Mais Frequentes}
+
+% Include results from tests/hashtable/most_frequent_authors.txt
+
+\chapter{Análise de Estruturas de Dados Balanceadas}
+
+\section{Árvore Vermelho-Preto}
+
+% Placeholder for results from tests/trees/redblack_tree/
+
+\section{Árvore B+ (d=2)}
+
+% Placeholder for results from tests/trees/bplustree_d2/
+
+\section{Árvore B+ (d=20)}
+
+% Placeholder for results from tests/trees/bplustree_d20/
+
+\section{Análise Comparativa}
+
+% Include comparison tables and graphs
+
+\chapter{Resultados e Discussão}
+
+\section{Síntese dos Resultados}
+
+\section{Interpretação dos Dados}
+
+\section{Limitações dos Experimentos}
+
+\chapter{Conclusões e Trabalhos Futuros}
+
+\section{Conclusões}
+
+Este trabalho apresentou uma análise abrangente de diferentes estruturas de dados e algoritmos...
+
+\section{Trabalhos Futuros}
+
+Possíveis extensões deste trabalho incluem:
+
+\begin{itemize}
+    \item Implementação de outras estruturas de dados balanceadas
+    \item Análise de complexidade espacial
+    \item Otimizações adicionais dos algoritmos
+    \item Análise em datasets maiores
+\end{itemize}
+
+% Back Matter
+\postextual
+
+\bibliography{referencias}
+
+% Appendix
+\begin{apendicesenv}
+
+\chapter{Resultados Completos}
+
+% Include full results tables here
+
+\chapter{Código-Fonte}
+
+% Include relevant code snippets if needed
+
+\end{apendicesenv}
+
+\end{document}
+
