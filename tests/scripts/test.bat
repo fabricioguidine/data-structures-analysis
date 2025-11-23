@@ -49,7 +49,8 @@ javac -cp "lib\junit-4.13.2.jar;lib\hamcrest-core-1.3.jar;build\classes" ^
     src\test\java\com\bookdepository\structures\hashtable\*.java ^
     src\test\java\com\bookdepository\structures\tree\redblack\*.java ^
     src\test\java\com\bookdepository\structures\tree\bplustree\*.java ^
-    src\test\java\com\bookdepository\io\*.java
+    src\test\java\com\bookdepository\io\*.java ^
+    src\test\java\com\bookdepository\experiments\*.java
 
 if errorlevel 1 (
     echo Compilation of test files failed!
@@ -71,11 +72,18 @@ java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.algorithms.so
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.hashtable.RecordHashTableTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.hashtable.AuthorHashTableTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.tree.redblack.RedBlackTreeTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.tree.redblack.RedBlackNodeTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.tree.bplustree.BPlusTreeTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.tree.bplustree.BPlusNodeTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.tree.bplustree.BPlusLeafNodeTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.structures.tree.bplustree.BPlusInternalNodeTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.io.PerformanceResultTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.io.FileReaderTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.io.OutputFileWriterTest
 java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.io.Part2OutputWriterTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.experiments.SortingExperimentTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.experiments.HashTableExperimentTest
+java -cp "%TEST_CP%" org.junit.runner.JUnitCore com.bookdepository.experiments.TreeExperimentTest
 
 echo.
 echo Test execution complete!
