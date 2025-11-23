@@ -46,18 +46,22 @@ The script will download the dataset files to the `data/` directory:
 │   └── requirements.txt
 ├── src/
 │   ├── main/
-│   │   └── java/
-│   │       ├── com/bookdepository/
-│   │       │   ├── model/           # Data models (Record, Author)
-│   │       │   ├── algorithms/      # Sorting algorithms
-│   │       │   ├── structures/      # Data structures (Hash tables, Trees)
-│   │       │   ├── io/              # File I/O utilities
-│   │       │   └── part1/           # Part I implementation
-│   │       │   └── part2/           # Part II implementation
-│   │       │   └── part3/           # Part III implementation
-│   │       └── resources/           # Configuration and input files
+│   │   ├── java/
+│   │   │   └── com/bookdepository/
+│   │   │       ├── model/           # Data models (Record, Author)
+│   │   │       ├── algorithms/      # Algorithm implementations
+│   │   │       │   └── sorting/     # Sorting algorithms (QuickSort, HeapSort)
+│   │   │       ├── structures/      # Data structure implementations
+│   │   │       │   ├── hashtable/   # Hash tables
+│   │   │       │   └── tree/        # Tree structures (Red-Black, B+)
+│   │   │       ├── experiments/     # Benchmarking applications
+│   │   │       ├── io/              # File I/O utilities
+│   │   │       └── utils/           # Utility functions
+│   │   └── resources/               # Configuration and input files
 └── README.md
 ```
+
+For detailed architecture information, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ### 3. Building the Project
 
@@ -100,12 +104,12 @@ Where `N` is the number of test cases, and each value represents the number of r
 100000
 ```
 
-### Running Part I
+### Running Sorting Experiment
 
 ```bash
-cd src/main/java/com/bookdepository/part1
-javac -d ../../../../../../build *.java
-java com.bookdepository.part1.Part1
+cd src/main/java
+javac -d ../../../build com/bookdepository/experiments/SortingExperiment.java
+java -cp ../../../build com.bookdepository.experiments.SortingExperiment
 ```
 
 The output will be written to `saida.txt` in the project root.
@@ -121,12 +125,12 @@ Implements a program that reads N random and distinct books and counts how many 
 - **Hash Table for Records**: Stores book records using open addressing with double hashing
 - **Hash Table for Authors**: Stores author information and their frequencies
 
-### Running Part II
+### Running Hash Table Experiment
 
 ```bash
-cd src/main/java/com/bookdepository/part2
-javac -d ../../../../../../build *.java
-java com.bookdepository.part2.Part2
+cd src/main/java
+javac -d ../../../build com/bookdepository/experiments/HashTableExperiment.java
+java -cp ../../../build com.bookdepository.experiments.HashTableExperiment
 ```
 
 The program will prompt for the number `N` of top authors to display. Output will be written to `saidaPart2.txt`.
