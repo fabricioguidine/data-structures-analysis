@@ -15,7 +15,7 @@ import java.io.IOException;
  * This program reads book records from the dataset and analyzes
  * the performance of QuickSort and HeapSort algorithms.
  * 
- * Output: Results are written to output/saida.txt
+ * Output: Results are written to output/output.txt
  */
 public class SortingExperiment {
     
@@ -54,7 +54,7 @@ public class SortingExperiment {
                 OutputFileWriter.writeSortingResults(java.util.Collections.singletonList(heapSortResult), "HeapSort");
             }
             
-            System.out.println("Experiment completed. Results written to output/saida.txt");
+            System.out.println("Experiment completed. Results written to output/output.txt");
             
         } catch (IOException e) {
             System.err.println("Error reading files: " + e.getMessage());

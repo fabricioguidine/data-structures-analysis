@@ -16,7 +16,7 @@ import java.io.IOException;
  * This program reads book records, uses hash tables to count author frequencies,
  * and identifies the most frequent authors.
  * 
- * Output: Results are written to output/saidaPart2.txt
+ * Output: Results are written to output/outputPart2.txt
  */
 public class HashTableExperiment {
     
@@ -66,7 +66,7 @@ public class HashTableExperiment {
             // Write top N authors to output file
             Part2OutputWriter.writeMostFrequentAuthors(allAuthors, topN);
             
-            System.out.println("Experiment completed. Results written to output/saidaPart2.txt");
+            System.out.println("Experiment completed. Results written to output/outputPart2.txt");
             System.out.println("Top " + Math.min(topN, allAuthors.size()) + " authors written to file.");
             
         } catch (IOException e) {

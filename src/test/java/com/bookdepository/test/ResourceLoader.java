@@ -16,7 +16,7 @@ public class ResourceLoader {
     /**
      * Loads a resource file as an InputStream.
      *
-     * @param resourcePath The path to the resource (e.g., "/test-entrada.txt")
+     * @param resourcePath The path to the resource (e.g., "/test-input.txt")
      * @return InputStream for the resource, or null if not found
      */
     public static InputStream getResourceAsStream(String resourcePath) {
@@ -26,7 +26,7 @@ public class ResourceLoader {
     /**
      * Reads a resource file as a string.
      *
-     * @param resourcePath The path to the resource (e.g., "/test-entrada.txt")
+     * @param resourcePath The path to the resource (e.g., "/test-input.txt")
      * @return The content of the resource file as a string
      * @throws IOException if the resource cannot be read
      */
@@ -70,7 +70,7 @@ public class ResourceLoader {
     /**
      * Reads a resource file line by line.
      *
-     * @param resourcePath The path to the resource (e.g., "/test-entrada.txt")
+     * @param resourcePath The path to the resource (e.g., "/test-input.txt")
      * @return Array of lines from the resource file
      * @throws IOException if the resource cannot be read
      */
@@ -93,11 +93,11 @@ public class ResourceLoader {
      * Common resource paths.
      */
     public static class Paths {
-        public static final String TEST_ENTRADA = "/test-entrada.txt";
+        public static final String TEST_INPUT = "/test-input.txt";
         public static final String SAMPLE_RECORDS = "/sample-records.csv";
         public static final String SAMPLE_AUTHORS = "/sample-authors.csv";
         public static final String TEST_CONFIG = "/test-config.properties";
-        public static final String TEST_OUTPUT_SAIDA = "/test-output-saida.txt";
+        public static final String TEST_OUTPUT = "/test-output.txt";
     }
 }
 
