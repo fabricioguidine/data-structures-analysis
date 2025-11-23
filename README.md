@@ -423,8 +423,8 @@ This is an academic project for DCC012 - Data Structures II at Universidade Fede
 ## 👥 Authors
 
 - **Débora Duarte** - [@DeboraIRDuarte](https://github.com/DeboraIRDuarte)
-- **Fabrício Guidine**
-- **Walkíria Garcia**
+- **Fabrício Guidine** - [@fabricioguidine](https://github.com/fabricioguidine)
+- **Walkíria Garcia** - [@walkiriagss](https://github.com/walkiriagss)
 
 ## 📄 License
 
