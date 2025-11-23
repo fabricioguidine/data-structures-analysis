@@ -58,6 +58,18 @@ output/*
 # Old project structure
 parte*/
 
+# Documentation files (keep only README and essential docs)
+PROJECT_STATUS.md
+USER_PROMPTS_LIST.md
+MIGRATION_PLAN.md
+*.md
+!README.md
+!**/README.md
+!docs/README.md
+!report/README.md
+!input/README.md
+!output/README.md
+
 # Build artifacts
 *.jar
 *.class

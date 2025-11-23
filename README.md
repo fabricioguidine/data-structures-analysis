@@ -1,10 +1,10 @@
-# Book Depository Data Structures Analysis
+# Data Structures and Algorithms Performance Analysis
 
 [![Java](https://img.shields.io/badge/Java-8%2B-orange.svg)](https://www.oracle.com/java/)
 [![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Academic-blue.svg)](LICENSE)
 
-A comprehensive data structures and algorithms analysis project using the [Book Depository dataset](https://www.kaggle.com/sp1thas/book-depository-dataset) from Kaggle. This project implements and compares various sorting algorithms, hash tables, and balanced tree structures for academic research purposes.
+A comprehensive performance analysis of fundamental data structures and algorithms using real-world data. This project implements and compares sorting algorithms (QuickSort, HeapSort), hash tables, and balanced tree structures (Red-Black Tree, B+ Trees) using the [Book Depository dataset](https://www.kaggle.com/sp1thas/book-depository-dataset) from Kaggle for empirical evaluation.
 
 ## 🎯 Overview
 
@@ -278,16 +278,21 @@ The complete project requirements are available in:
 
 ### Technical Report
 
-A comprehensive technical report in LaTeX (using abnTeX) is located in `docs/latex/`:
+A comprehensive technical report in LaTeX (using abnTeX2) analyzing all experimental results is located in `report/`:
 
-- **Main document**: `docs/latex/relatorio.tex`
-- **Bibliography**: `docs/latex/referencias.bib`
-- **Build instructions**: See `docs/latex/README.md`
+- **Main document**: `report/relatorio.tex`
+- **Bibliography**: `report/referencias.bib`
+- **Build instructions**: See `report/README.md`
+
+The report analyzes results from the `tests/` directory, including:
+- Sorting algorithm performance (`tests/sorting/`)
+- Hash table experiments (`tests/hashtable/`)
+- Tree structure benchmarks (`tests/trees/`)
 
 To compile the report:
 
 ```bash
-cd docs/latex
+cd report
 make pdf
 ```
 

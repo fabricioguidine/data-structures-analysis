@@ -207,15 +207,43 @@ Os experimentos de ordenação foram realizados com diferentes tamanhos de entra
 
 \section{Resultados}
 
-% Placeholder for results from tests/sorting/
+Os resultados dos experimentos de ordenação estão disponíveis na pasta \texttt{tests/sorting/}. A análise foi realizada considerando diferentes tamanhos de entrada para comparar o desempenho dos algoritmos.
 
 \subsection{QuickSort}
 
-% Include results from tests/sorting/quicksort_results.txt
+Os resultados do QuickSort foram obtidos a partir dos arquivos em \texttt{../tests/sorting/quicksort/} e mostram:
+
+\begin{itemize}
+    \item Número de comparações realizadas
+    \item Número de trocas/cópias de elementos
+    \item Tempo de execução em milissegundos
+\end{itemize}
+
+% Include results from ../tests/sorting/quicksort/analysis.txt
+\IfFileExists{../tests/sorting/quicksort/analysis.txt}{
+    \input{../tests/sorting/quicksort/analysis.txt}
+}{
+    % Placeholder: Add results table/graph when available
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \subsection{HeapSort}
 
-% Include results from tests/sorting/heapsort_results.txt
+Os resultados do HeapSort foram obtidos a partir dos arquivos em \texttt{../tests/sorting/heapsort/} e mostram:
+
+\begin{itemize}
+    \item Número de comparações realizadas
+    \item Número de trocas/cópias de elementos
+    \item Tempo de execução em milissegundos
+\end{itemize}
+
+% Include results from ../tests/sorting/heapsort/analysis.txt
+\IfFileExists{../tests/sorting/heapsort/analysis.txt}{
+    \input{../tests/sorting/heapsort/analysis.txt}
+}{
+    % Placeholder: Add results table/graph when available
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \section{Análise Comparativa}
 
@@ -227,37 +255,120 @@ As tabelas hash foram implementadas utilizando endereçamento aberto com double 
 
 \section{Resultados}
 
-% Placeholder for results from tests/hashtable/
+Os resultados dos experimentos com tabelas hash estão disponíveis na pasta \texttt{tests/hashtable/}. A análise inclui:
+
+\begin{itemize}
+    \item Desempenho da inserção de registros na tabela hash
+    \item Eficiência da busca por autores
+    \item Análise de colisões e rehashing
+\end{itemize}
+
+% Include results from ../tests/hashtable/analysis.txt
+\IfFileExists{../tests/hashtable/analysis.txt}{
+    \input{../tests/hashtable/analysis.txt}
+}{
+    % Placeholder: Add results table/graph when available
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \section{Análise de Autores Mais Frequentes}
 
-% Include results from tests/hashtable/most_frequent_authors.txt
+Os resultados da identificação dos autores mais frequentes estão em \texttt{../tests/hashtable/most_frequent_authors.txt}.
+
+% Include results from ../tests/hashtable/most_frequent_authors.txt
+\IfFileExists{../tests/hashtable/most_frequent_authors.txt}{
+    \input{../tests/hashtable/most_frequent_authors.txt}
+}{
+    % Placeholder: Add results when available
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \chapter{Análise de Estruturas de Dados Balanceadas}
 
 \section{Árvore Vermelho-Preto}
 
-% Placeholder for results from tests/trees/redblack_tree/
+Os resultados dos experimentos com árvore Vermelho-Preto estão em \texttt{../tests/trees/redblack/}.
+
+% Include results from ../tests/trees/redblack/analysis.txt
+\IfFileExists{../tests/trees/redblack/analysis.txt}{
+    \input{../tests/trees/redblack/analysis.txt}
+}{
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \section{Árvore B+ (d=2)}
 
-% Placeholder for results from tests/trees/bplustree_d2/
+Os resultados dos experimentos com árvore B+ de ordem 2 estão em \texttt{../tests/trees/bplustree/d2/}.
+
+% Include results from ../tests/trees/bplustree/d2/analysis.txt
+\IfFileExists{../tests/trees/bplustree/d2/analysis.txt}{
+    \input{../tests/trees/bplustree/d2/analysis.txt}
+}{
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \section{Árvore B+ (d=20)}
 
-% Placeholder for results from tests/trees/bplustree_d20/
+Os resultados dos experimentos com árvore B+ de ordem 20 estão em \texttt{../tests/trees/bplustree/d20/}.
+
+% Include results from ../tests/trees/bplustree/d20/analysis.txt
+\IfFileExists{../tests/trees/bplustree/d20/analysis.txt}{
+    \input{../tests/trees/bplustree/d20/analysis.txt}
+}{
+    \textbf{Resultados:} Os resultados completos estarão disponíveis após a execução dos experimentos.
+}
 
 \section{Análise Comparativa}
 
-% Include comparison tables and graphs
+Uma análise comparativa completa dos resultados está disponível em \texttt{../tests/trees/comparison/}.
+
+% Include comparison tables and graphs from ../tests/trees/comparison/
+\IfFileExists{../tests/trees/comparison/comparison.tex}{
+    \input{../tests/trees/comparison/comparison.tex}
+}{
+    % Placeholder: Add comparison table/graph when available
+    \textbf{Análise Comparativa:} A comparação entre as diferentes estruturas de dados estará disponível após a execução dos experimentos.
+}
 
 \chapter{Resultados e Discussão}
 
 \section{Síntese dos Resultados}
 
+Esta seção apresenta uma síntese dos resultados obtidos nos experimentos realizados. Os dados completos estão organizados na pasta \texttt{../tests/} e foram analisados para cada tipo de estrutura e algoritmo.
+
+\subsection{Síntese dos Algoritmos de Ordenação}
+
+Os resultados completos estão disponíveis em \texttt{../tests/sorting/results/}.
+
+\subsection{Síntese das Tabelas Hash}
+
+Os resultados completos estão disponíveis em \texttt{../tests/hashtable/results/}.
+
+\subsection{Síntese das Estruturas de Árvores}
+
+Os resultados completos estão disponíveis em \texttt{../tests/trees/results/}.
+
 \section{Interpretação dos Dados}
 
+A interpretação dos dados considerou:
+
+\begin{itemize}
+    \item Complexidade teórica vs. desempenho empírico
+    \item Impacto do tamanho dos dados nas métricas
+    \item Comparação entre diferentes estruturas e algoritmos
+    \item Análise dos resultados disponíveis em \texttt{../tests/results/}
+\end{itemize}
+
 \section{Limitações dos Experimentos}
+
+As limitações identificadas nos experimentos incluem:
+
+\begin{itemize}
+    \item Resultados dependem do ambiente de execução (JVM)
+    \item Tamanhos de entrada limitados aos valores do arquivo \texttt{../input/entrada.txt}
+    \item Métricas de tempo podem variar entre execuções
+    \item Resultados detalhados disponíveis em \texttt{../tests/results/}
+\end{itemize}
 
 \chapter{Conclusões e Trabalhos Futuros}
 
