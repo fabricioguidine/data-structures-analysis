@@ -30,6 +30,7 @@
 \usepackage{url}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{makecell}
 
 % Table caption configuration - centered and aligned with table width
 \captionsetup[table]{
@@ -511,7 +512,7 @@ The results from the Red-Black tree experiments are in \texttt{output/saidaInser
 \centering
 \begin{tabular}{c c c c c}
     \toprule
-    \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Insertion Comparisons} & \textbf{Insertion Swaps} \\
+    \textbf{Operations} & \makecell{\textbf{Insertion}\\\textbf{Time (ms)}} & \makecell{\textbf{Search}\\\textbf{Time (ms)}} & \makecell{\textbf{Insertion}\\\textbf{Comparisons}} & \makecell{\textbf{Insertion}\\\textbf{Swaps}} \\
     \midrule
     1,000 & 12 & 5 & 8,923 & 4,532 \\
     5,000 & 67 & 28 & 48,567 & 23,456 \\
@@ -534,7 +535,7 @@ The results from the B+ tree experiments with degree 2 are in \texttt{output/sai
 \centering
 \begin{tabular}{c c c c c}
     \toprule
-    \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Insertion Comparisons} & \textbf{Insertion Swaps} \\
+    \textbf{Operations} & \makecell{\textbf{Insertion}\\\textbf{Time (ms)}} & \makecell{\textbf{Search}\\\textbf{Time (ms)}} & \makecell{\textbf{Insertion}\\\textbf{Comparisons}} & \makecell{\textbf{Insertion}\\\textbf{Swaps}} \\
     \midrule
     1,000 & 8 & 3 & 6,789 & 3,456 \\
     5,000 & 45 & 18 & 35,678 & 18,945 \\
@@ -557,7 +558,7 @@ The results from the B+ tree experiments with degree 20 are in \texttt{output/sa
 \centering
 \begin{tabular}{c c c c c}
     \toprule
-    \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Insertion Comparisons} & \textbf{Insertion Swaps} \\
+    \textbf{Operations} & \makecell{\textbf{Insertion}\\\textbf{Time (ms)}} & \makecell{\textbf{Search}\\\textbf{Time (ms)}} & \makecell{\textbf{Insertion}\\\textbf{Comparisons}} & \makecell{\textbf{Insertion}\\\textbf{Swaps}} \\
     \midrule
     1,000 & 6 & 2 & 5,234 & 2,789 \\
     5,000 & 34 & 12 & 28,765 & 15,432 \\
