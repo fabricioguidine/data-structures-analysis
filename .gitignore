@@ -5,7 +5,6 @@
 *.ear
 *.nar
 build/
-dist/
 out/
 target/
 .gradle/
@@ -33,6 +32,28 @@ data/
 !input/entrada.txt
 !input/README.md
 
+# LaTeX - keep source files and compiled PDF
+docs/latex/*.aux
+docs/latex/*.log
+docs/latex/*.out
+docs/latex/*.toc
+docs/latex/*.lof
+docs/latex/*.lot
+docs/latex/*.bbl
+docs/latex/*.blg
+docs/latex/*.idx
+docs/latex/*.ilg
+docs/latex/*.ind
+docs/latex/*.synctex.gz
+!docs/latex/*.tex
+!docs/latex/*.bib
+!docs/latex/*.pdf
+!docs/latex/Makefile
+!docs/latex/*.sh
+!docs/latex/*.ps1
+!docs/latex/README.md
+!docs/latex/*.md
+
 # IDE
 .idea/
 *.iml
@@ -55,6 +76,13 @@ Thumbs.db
 output/*
 !output/README.md
 
+# Dist directory - keep structure and JAR file
+!dist/
+dist/*
+!dist/bookdepository-ds-analysis.jar
+!dist/README.md
+!dist/BUILD_STATUS.md
+
 # Old project structure
 parte*/
 
@@ -66,16 +94,25 @@ MIGRATION_PLAN.md
 !README.md
 !**/README.md
 !docs/README.md
-!report/README.md
+!BUILD.md
+!BUILD_INSTRUCTIONS.md
 !input/README.md
 !output/README.md
+!dist/README.md
+!docs/latex/README.md
+!docs/latex/COMPILE_PDF.md
 
-# Build artifacts
-*.jar
+# Build artifacts (keep JAR in dist/)
 *.class
 javadoc/
 build.xml
 manifest.mf
+build/
+*.log
+
+# Keep JAR in dist/ directory for releases
+!dist/bookdepository-ds-analysis.jar
+!dist/README.md
 
 # Tokens and secrets
 *.token

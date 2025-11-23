@@ -1,10 +1,12 @@
-# Data Structures and Algorithms Performance Analysis
+# Performance Analysis for Data Structures and Algorithms
+
+> A comprehensive performance analysis of fundamental data structures and algorithms using the Book Depository dataset
 
 [![Java](https://img.shields.io/badge/Java-8%2B-orange.svg)](https://www.oracle.com/java/)
 [![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-Academic-blue.svg)](LICENSE)
 
-A comprehensive performance analysis of fundamental data structures and algorithms using real-world data. This project implements and compares sorting algorithms (QuickSort, HeapSort), hash tables, and balanced tree structures (Red-Black Tree, B+ Trees) using the [Book Depository dataset](https://www.kaggle.com/sp1thas/book-depository-dataset) from Kaggle for empirical evaluation.
+This project provides a comprehensive performance analysis of fundamental data structures and algorithms using the [Book Depository dataset](https://www.kaggle.com/sp1thas/book-depository-dataset) from Kaggle. It implements and empirically evaluates sorting algorithms (QuickSort, HeapSort), hash tables, and balanced tree structures (Red-Black Tree, B+ Trees) with real-world book and author data.
 
 ## 🎯 Overview
 
@@ -22,6 +24,7 @@ This repository contains three main experimental parts that analyze different as
   - [Project Structure](#project-structure)
   - [Building the Project](#building-the-project)
 - [Usage](#-usage)
+- [JAR File](#-jar-file)
   - [Part I: Sorting Algorithms](#part-i-sorting-algorithms)
   - [Part II: Hash Tables](#part-ii-hash-tables)
   - [Part III: Tree Structures](#part-iii-tree-structures)
@@ -141,18 +144,122 @@ The script will download the dataset files to the `data/` directory:
 
 ### Building the Project
 
-This project uses standard Java compilation. Build steps:
+This project provides multiple build options to create a JAR file:
 
-**1. Compile the project:**
+#### Option 1: Using Make (Linux/Mac/Git Bash)
 
 ```bash
-cd src/main/java
-javac -d ../../../build com/bookdepository/**/*.java
+make
 ```
 
-**2. Run experiments:**
+This will compile all Java files and create `dist/bookdepository-ds-analysis.jar`.
 
-Each experiment can be compiled and run independently (see Usage section below).
+#### Option 2: Using Build Script (Linux/Mac)
+
+```bash
+chmod +x build.sh
+./build.sh
+```
+
+#### Option 3: Using Build Script (Windows)
+
+```bash
+build.bat
+```
+
+#### Option 4: Manual Compilation
+
+```bash
+# Create build directories
+mkdir -p build/classes dist
+
+# Compile all Java files
+javac -d build/classes -sourcepath src/main/java \
+    src/main/java/com/bookdepository/model/*.java \
+    src/main/java/com/bookdepository/io/*.java \
+    src/main/java/com/bookdepository/algorithms/sorting/*.java \
+    src/main/java/com/bookdepository/structures/hashtable/*.java \
+    src/main/java/com/bookdepository/structures/tree/redblack/*.java \
+    src/main/java/com/bookdepository/structures/tree/bplustree/*.java \
+    src/main/java/com/bookdepository/experiments/*.java
+
+# Create manifest
+mkdir -p build/META-INF
+echo "Manifest-Version: 1.0" > build/META-INF/MANIFEST.MF
+echo "Main-Class: com.bookdepository.experiments.SortingExperiment" >> build/META-INF/MANIFEST.MF
+
+# Create JAR file
+jar cfm dist/bookdepository-ds-analysis.jar build/META-INF/MANIFEST.MF -C build/classes .
+```
+
+**Output:** The JAR file will be created in `dist/bookdepository-ds-analysis.jar`
+
+#### Running Experiments from JAR
+
+After building, you can run experiments using the JAR file:
+
+```bash
+# Part I: Sorting Algorithms
+java -cp dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.SortingExperiment
+
+# Part II: Hash Tables
+java -cp dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.HashTableExperiment
+
+# Part III: Tree Structures
+java -cp dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.TreeExperiment
+```
+
+## 🧪 Testing
+
+This project includes a comprehensive JUnit test suite to validate all implementations.
+
+### Running Tests
+
+**Linux/Mac/Git Bash:**
+```bash
+make test
+# or
+./test.sh
+```
+
+**Windows:**
+```bash
+test.bat
+```
+
+### Test Coverage
+
+The test suite covers:
+- **Model Classes**: `Record` and `Author` validation
+- **Sorting Algorithms**: QuickSort and HeapSort correctness tests
+- **Hash Tables**: `RecordHashTable` and `AuthorHashTable` functionality
+- **Tree Structures**: Red-Black Tree and B+ Tree operations
+- **I/O Utilities**: File reading and writing validation
+
+### Test Requirements
+
+Before running tests, download JUnit dependencies:
+
+```bash
+# Download JUnit JAR files to lib/ directory
+# See lib/README.md for detailed instructions
+```
+
+**Quick Download (Linux/Mac):**
+```bash
+cd lib
+curl -O https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar
+curl -O https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+```
+
+**Quick Download (Windows PowerShell):**
+```powershell
+cd lib
+Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar" -OutFile "junit-4.13.2.jar"
+Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" -OutFile "hamcrest-core-1.3.jar"
+```
+
+All test classes are located in `src/test/java/com/bookdepository/`. See `tests/README.md` for more information about the test structure and results.
 
 ## 💻 Usage
 
@@ -278,23 +385,28 @@ The complete project requirements are available in:
 
 ### Technical Report
 
-A comprehensive technical report in LaTeX (using abnTeX2) analyzing all experimental results is located in `report/`:
+A comprehensive technical report in LaTeX (using abnTeX2) analyzing all experimental results is located in `docs/latex/`:
 
-- **Main document**: `report/relatorio.tex`
-- **Bibliography**: `report/referencias.bib`
-- **Build instructions**: See `report/README.md`
+- **Main document**: `docs/latex/relatorio.tex`
+- **Bibliography**: `docs/latex/referencias.bib`
+- **Compiled PDF**: `docs/latex/relatorio.pdf` (needs to be compiled)
+- **Build instructions**: See `docs/latex/README.md` or `docs/latex/COMPILE_PDF.md`
 
 The report analyzes results from the `tests/` directory, including:
 - Sorting algorithm performance (`tests/sorting/`)
 - Hash table experiments (`tests/hashtable/`)
 - Tree structure benchmarks (`tests/trees/`)
 
-To compile the report:
+**To compile the PDF report:**
 
 ```bash
-cd report
+cd docs/latex
 make pdf
 ```
+
+Or use Overleaf (online LaTeX editor): https://www.overleaf.com/
+
+**Note:** The compiled PDF (`relatorio.pdf`) should be committed to the repository after compilation.
 
 ## 🤝 Contributing
 
@@ -338,3 +450,27 @@ Each book record contains the following fields:
 ---
 
 **Note:** This project is for academic purposes as part of the Data Structures II course at UFJF.
+
+## 📦 JAR File
+
+A pre-built JAR file is available in `dist/bookdepository-ds-analysis.jar` for convenience.
+
+**To rebuild the JAR file:**
+1. Ensure Java JDK 8+ is installed
+2. Run the build script:
+   - **Linux/Mac/Git Bash**: `make` or `./build.sh`
+   - **Windows**: `build.bat`
+3. The JAR will be created in `dist/bookdepository-ds-analysis.jar`
+4. After building, clean up build artifacts: `make clean` or delete the `build/` directory
+
+**Running from JAR:**
+```bash
+# Part I: Sorting Algorithms
+java -cp dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.SortingExperiment
+
+# Part II: Hash Tables
+java -cp dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.HashTableExperiment
+
+# Part III: Tree Structures
+java -cp dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.TreeExperiment
+```
