@@ -211,36 +211,98 @@ The experiments were executed in:
 
 \section{Testing Methodology}
 
-To ensure the correctness and reliability of all implemented algorithms and data structures, a comprehensive test suite was developed using JUnit 4. The testing framework validates all components of the project.
+To ensure the correctness and reliability of all implemented algorithms and data structures, a comprehensive test suite was developed using modern Java testing frameworks. The testing framework validates all components of the project through unit tests, integration tests, and performance benchmarks.
+
+\subsection{Testing Frameworks}
+
+The test suite utilizes multiple testing frameworks to ensure comprehensive coverage:
+
+\begin{itemize}
+    \item \textbf{JUnit 5 (Jupiter)}: Primary unit testing framework for modern Java testing
+    \item \textbf{JUnit 4}: Backward compatibility support for legacy tests
+    \item \textbf{Mockito}: Mocking framework for isolating components under test
+    \item \textbf{AssertJ}: Fluent assertions library for readable test assertions
+    \item \textbf{JMH (Java Microbenchmark Harness)}: Framework for precise microbenchmarking and performance measurement
+    \item \textbf{Hamcrest}: Matcher library for expressive assertions
+\end{itemize}
 
 \subsection{Test Coverage}
 
-The test suite includes:
+The test suite includes comprehensive coverage for all algorithm implementations:
 
+\subsubsection{Sorting Algorithms Tests}
+
+Unit tests for sorting algorithms are implemented in:
 \begin{itemize}
-    \item \textbf{Model Classes}: Tests for \texttt{Record} and \texttt{Author} classes, validating constructors, getters, setters, and comparison methods
-    \item \textbf{Sorting Algorithms}: Unit tests for QuickSort and HeapSort, verifying correctness for various input sizes and edge cases (empty arrays, single elements, already sorted, reverse sorted, random order)
-    \item \textbf{Hash Tables}: Tests for \texttt{RecordHashTable} and \texttt{AuthorHashTable}, validating insertion, search, resize operations, and collision handling
-    \item \textbf{Tree Structures}: Tests for Red-Black Tree and B+ Tree implementations, validating insertion, search, and balance properties
-    \item \textbf{I/O Utilities}: Tests for file reading and writing operations, ensuring correct data parsing and output generation
+    \item \texttt{QuickSortTest.java}: Comprehensive unit tests for QuickSort algorithm
+    \item \texttt{HeapSortTest.java}: Comprehensive unit tests for HeapSort algorithm
+\end{itemize}
+
+These tests validate:
+\begin{itemize}
+    \item \textbf{Edge Cases}: Empty arrays, null arrays, single element arrays
+    \item \textbf{Input Variations}: Already sorted arrays, reverse sorted arrays, random order arrays
+    \item \textbf{Special Cases}: Arrays with duplicate ranks, arrays with zero ranks
+    \item \textbf{Correctness}: Verification that arrays are properly sorted after algorithm execution
+    \item \textbf{Performance Metrics}: Tracking of comparisons, swaps, and execution time
+    \item \textbf{Scalability}: Testing with various input sizes (10, 100, 1000, 10000, 50000 elements)
+    \item \textbf{Parameterized Tests}: Testing multiple input sizes systematically using JUnit 5 parameterized tests
+\end{itemize}
+
+\subsubsection{Performance Tests}
+
+Performance testing is implemented through:
+\begin{itemize}
+    \item \texttt{PerformanceTest.java}: Performance benchmarks for sorting algorithms
+    \item \texttt{SortingBenchmark.java}: JMH microbenchmarks for precise performance measurement
+\end{itemize}
+
+Performance tests evaluate:
+\begin{itemize}
+    \item Execution time across different input sizes (100, 1000, 10000, 100000 elements)
+    \item Algorithm comparison (QuickSort vs HeapSort) with identical input data
+    \item Performance with different input distributions (sorted, reverse sorted, random)
+    \item Memory efficiency and resource usage
+    \item Consistent performance characteristics across multiple runs
+\end{itemize}
+
+\subsubsection{Integration Tests}
+
+Integration tests verify end-to-end functionality:
+\begin{itemize}
+    \item \texttt{SortingExperimentIntegrationTest.java}: Validates complete experiment execution workflow
+    \item Tests multiple algorithm runs with consistency checks
+    \item Verifies result reproducibility across executions
+\end{itemize}
+
+\subsubsection{Test Utilities}
+
+Supporting test utilities are provided in:
+\begin{itemize}
+    \item \texttt{TestUtils.java}: Utility methods for generating test data (sorted, reverse sorted, random arrays)
+    \item Helper methods for creating test records with specific ranks
+    \item Methods for verifying array sorting correctness
+    \item Data cloning utilities for fair algorithm comparisons
 \end{itemize}
 
 \subsection{Test Execution}
 
-All tests can be executed using scripts in the \texttt{tests/scripts/} directory:
+All tests are executed using Maven through the Maven Surefire plugin:
 
 \begin{itemize}
-    \item \texttt{tests/scripts/test.sh} (Linux/Mac/Git Bash)
-    \item \texttt{tests/scripts/test.bat} (Windows)
+    \item \texttt{mvn test}: Executes all unit tests
+    \item \texttt{mvn test -Dtest=QuickSortTest}: Execute specific test class
+    \item \texttt{mvn test -Dtest=SortingBenchmark}: Execute JMH benchmarks
 \end{itemize}
 
-The test suite uses JUnit 4 framework and validates:
+The test suite validates:
 \begin{itemize}
     \item Correctness of all algorithm implementations
     \item Proper behavior of data structures under various conditions
     \item Edge cases including null inputs, empty collections, and boundary conditions
-    \item Performance tracking mechanisms
+    \item Performance tracking mechanisms (comparisons, swaps, execution time)
     \item Data integrity and consistency
+    \item Scalability and performance characteristics
 \end{itemize}
 
 The comprehensive test suite ensures that all implementations maintain correctness across different scenarios and edge cases, providing confidence in the experimental results presented in this report.

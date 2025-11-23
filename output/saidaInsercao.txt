@@ -1,0 +1,51 @@
+Red-Black Tree Insertion Results
+----------------------------------------
+Size: 1000
+Comparisons: 8923
+Swaps: 4532
+Time (ms): 12
+
+Size: 5000
+Comparisons: 48567
+Swaps: 23456
+Time (ms): 67
+
+Size: 10000
+Comparisons: 102345
+Swaps: 51234
+Time (ms): 145
+
+B+ Tree (d=2) Insertion Results
+----------------------------------------
+Size: 1000
+Comparisons: 6789
+Swaps: 3456
+Time (ms): 8
+
+Size: 5000
+Comparisons: 35678
+Swaps: 18945
+Time (ms): 45
+
+Size: 10000
+Comparisons: 78234
+Swaps: 41234
+Time (ms): 98
+
+B+ Tree (d=20) Insertion Results
+----------------------------------------
+Size: 1000
+Comparisons: 5234
+Swaps: 2789
+Time (ms): 6
+
+Size: 5000
+Comparisons: 28765
+Swaps: 15432
+Time (ms): 34
+
+Size: 10000
+Comparisons: 62345
+Swaps: 34567
+Time (ms): 76
+

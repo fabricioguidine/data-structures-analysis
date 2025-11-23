@@ -1,0 +1,12 @@
+id,title,author_id,bestsellers_rank,price,rating
+1,"Sample Book 1","A1",5,19.99,4.5
+2,"Sample Book 2","A2",12,24.99,4.3
+3,"Sample Book 3","A1",8,15.99,4.7
+4,"Sample Book 4","A3",1,29.99,4.9
+5,"Sample Book 5","A2",15,12.99,4.2
+6,"Sample Book 6","A4",3,22.99,4.6
+7,"Sample Book 7","A3",20,18.99,4.1
+8,"Sample Book 8","A1",7,16.99,4.4
+9,"Sample Book 9","A5",2,27.99,4.8
+10,"Sample Book 10","A2",11,21.99,4.5
+

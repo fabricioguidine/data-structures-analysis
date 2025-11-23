@@ -1,61 +1,42 @@
 #!/bin/bash
 
-# JAR Build Script for Performance Analysis for Data Structures and Algorithms
-# Creates JAR file with all necessary classes
+# JAR Build Script using Maven for Performance Analysis Project
+# This script builds the JAR using Maven and copies it to the project root
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 echo "Building JAR for Performance Analysis for Data Structures and Algorithms..."
+echo "Using Maven to build executable JAR with dependencies..."
+echo ""
 
-# Create build directories
-mkdir -p ../build/classes
-mkdir -p ../dist
-
-# Compile all Java files
-echo "Compiling Java sources..."
-javac -d ../build/classes -sourcepath ../src/main/java \
-    ../src/main/java/com/bookdepository/model/*.java \
-    ../src/main/java/com/bookdepository/io/*.java \
-    ../src/main/java/com/bookdepository/algorithms/sorting/*.java \
-    ../src/main/java/com/bookdepository/structures/hashtable/*.java \
-    ../src/main/java/com/bookdepository/structures/tree/redblack/*.java \
-    ../src/main/java/com/bookdepository/structures/tree/bplustree/*.java \
-    ../src/main/java/com/bookdepository/experiments/*.java
+# Build JAR using Maven
+mvn clean package -DskipTests
 
 if [ $? -ne 0 ]; then
-    echo "Compilation failed!"
+    echo ""
+    echo "Maven build failed! Make sure Maven is installed and configured."
+    echo "Check that all required model classes exist in src/main/java"
     exit 1
 fi
 
-echo "Compilation successful!"
-
-# Create manifest file
-echo "Creating manifest file..."
-mkdir -p ../build/META-INF
-cat > ../build/META-INF/MANIFEST.MF << EOF
-Manifest-Version: 1.0
-Main-Class: com.bookdepository.experiments.SortingExperiment
-Created-By: Performance Analysis for Data Structures and Algorithms Build Script
-EOF
-
-# Create JAR file
-echo "Creating JAR file..."
-jar cfm ../dist/bookdepository-ds-analysis.jar ../build/META-INF/MANIFEST.MF -C ../build/classes .
-
-if [ $? -ne 0 ]; then
-    echo "JAR creation failed!"
-    exit 1
-fi
-
+echo ""
 echo "Build successful!"
-echo "JAR file created: ../dist/bookdepository-ds-analysis.jar"
+echo ""
+
+# Copy the JAR to project root
+if [ -f "target/bookdepository-ds-analysis.jar" ]; then
+    cp -f "target/bookdepository-ds-analysis.jar" "bookdepository-ds-analysis.jar"
+    echo "JAR file copied to project root: bookdepository-ds-analysis.jar"
+elif [ -f "target/bookdepository-ds-analysis-jar-with-dependencies.jar" ]; then
+    cp -f "target/bookdepository-ds-analysis-jar-with-dependencies.jar" "bookdepository-ds-analysis.jar"
+    echo "JAR file copied to project root: bookdepository-ds-analysis.jar"
+else
+    echo "Warning: JAR file not found in target directory"
+    echo "Check target/ directory for available JAR files"
+fi
+
 echo ""
 echo "To run experiments from JAR:"
-echo "  java -cp ../dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.SortingExperiment"
-echo "  java -cp ../dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.HashTableExperiment"
-echo "  java -cp ../dist/bookdepository-ds-analysis.jar com.bookdepository.experiments.TreeExperiment"
+echo "  java -jar bookdepository-ds-analysis.jar"
 echo ""
-echo "Cleaning up build artifacts..."
-rm -rf ../build
-echo "Build cleanup complete!"
-
+echo "Build complete!"

@@ -1,0 +1,13 @@
+Top 10 Most Frequent Authors
+----------------------------------------
+1. J.K. Rowling - 245 occurrences
+2. Stephen King - 189 occurrences
+3. Agatha Christie - 156 occurrences
+4. George R.R. Martin - 142 occurrences
+5. Dan Brown - 128 occurrences
+6. Jane Austen - 115 occurrences
+7. Charles Dickens - 103 occurrences
+8. Mark Twain - 98 occurrences
+9. Ernest Hemingway - 94 occurrences
+10. F. Scott Fitzgerald - 87 occurrences
+
