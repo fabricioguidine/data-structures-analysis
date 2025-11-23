@@ -102,6 +102,11 @@ The script will download the dataset files to the `data/` directory:
 │   ├── saidaInsercao.txt       # Part III insertion results
 │   ├── saidaBusca.txt          # Part III search results
 │   └── README.md
+├── jar-build/                   # JAR build scripts and tools
+│   ├── Makefile                # Make-based build
+│   ├── build.sh                # Bash build script
+│   ├── build.bat               # Windows build script
+│   └── README.md               # Build instructions
 ├── scripts/                     # Utility scripts
 │   ├── download_dataset.py     # Kaggle dataset downloader
 │   └── requirements.txt        # Python dependencies
@@ -133,10 +138,14 @@ The script will download the dataset files to the `data/` directory:
 │               │   ├── Part2OutputWriter.java
 │               │   └── PerformanceResult.java
 │               └── utils/           # Utility functions
-├── tests/                       # Test results and analysis
-│   ├── sorting/
-│   ├── hashtable/
-│   └── trees/
+├── tests/                       # Test results and test scripts
+│   ├── scripts/                # JUnit test execution scripts
+│   │   ├── test.sh             # Bash test script
+│   │   ├── test.bat            # Windows test script
+│   │   └── README.md           # Test script instructions
+│   ├── sorting/                # Sorting algorithm test results
+│   ├── hashtable/              # Hash table test results
+│   └── trees/                  # Tree structure test results
 ├── .gitignore
 ├── README.md
 └── LICENSE
@@ -144,59 +153,32 @@ The script will download the dataset files to the `data/` directory:
 
 ### Building the Project
 
-This project provides multiple build options to create a JAR file:
+This project provides a JAR file generation system located in the `jar-build/` directory.
 
-#### Option 1: Using Make (Linux/Mac/Git Bash)
+#### Building the JAR File
 
+**Linux/Mac/Git Bash:**
 ```bash
+cd jar-build
 make
-```
-
-This will compile all Java files and create `dist/bookdepository-ds-analysis.jar`.
-
-#### Option 2: Using Build Script (Linux/Mac)
-
-```bash
+# or
 chmod +x build.sh
 ./build.sh
 ```
 
-#### Option 3: Using Build Script (Windows)
-
+**Windows:**
 ```bash
+cd jar-build
 build.bat
 ```
 
-#### Option 4: Manual Compilation
+**Output:** The JAR file will be created at `dist/bookdepository-ds-analysis.jar`
 
-```bash
-# Create build directories
-mkdir -p build/classes dist
-
-# Compile all Java files
-javac -d build/classes -sourcepath src/main/java \
-    src/main/java/com/bookdepository/model/*.java \
-    src/main/java/com/bookdepository/io/*.java \
-    src/main/java/com/bookdepository/algorithms/sorting/*.java \
-    src/main/java/com/bookdepository/structures/hashtable/*.java \
-    src/main/java/com/bookdepository/structures/tree/redblack/*.java \
-    src/main/java/com/bookdepository/structures/tree/bplustree/*.java \
-    src/main/java/com/bookdepository/experiments/*.java
-
-# Create manifest
-mkdir -p build/META-INF
-echo "Manifest-Version: 1.0" > build/META-INF/MANIFEST.MF
-echo "Main-Class: com.bookdepository.experiments.SortingExperiment" >> build/META-INF/MANIFEST.MF
-
-# Create JAR file
-jar cfm dist/bookdepository-ds-analysis.jar build/META-INF/MANIFEST.MF -C build/classes .
-```
-
-**Output:** The JAR file will be created in `dist/bookdepository-ds-analysis.jar`
+For detailed build instructions, see `jar-build/README.md`.
 
 #### Running Experiments from JAR
 
-After building, you can run experiments using the JAR file:
+After building, run experiments using the JAR file:
 
 ```bash
 # Part I: Sorting Algorithms
@@ -217,13 +199,14 @@ This project includes a comprehensive JUnit test suite to validate all implement
 
 **Linux/Mac/Git Bash:**
 ```bash
-make test
-# or
+cd tests/scripts
+chmod +x test.sh
 ./test.sh
 ```
 
 **Windows:**
 ```bash
+cd tests\scripts
 test.bat
 ```
 

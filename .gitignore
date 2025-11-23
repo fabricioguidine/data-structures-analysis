@@ -81,7 +81,14 @@ output/*
 dist/*
 !dist/bookdepository-ds-analysis.jar
 !dist/README.md
-!dist/BUILD_STATUS.md
+
+# JAR build directory - keep scripts
+!jar-build/
+jar-build/*
+!jar-build/Makefile
+!jar-build/build.sh
+!jar-build/build.bat
+!jar-build/README.md
 
 # Old project structure
 parte*/
@@ -94,13 +101,13 @@ MIGRATION_PLAN.md
 !README.md
 !**/README.md
 !docs/README.md
-!BUILD.md
-!BUILD_INSTRUCTIONS.md
 !input/README.md
 !output/README.md
 !dist/README.md
 !docs/latex/README.md
-!docs/latex/COMPILE_PDF.md
+!jar-build/README.md
+!tests/scripts/README.md
+!lib/README.md
 
 # Build artifacts (keep JAR in dist/)
 *.class
@@ -128,4 +135,8 @@ github_token*
 git_token*
 gh_token*
 
-# Push scripts with tokens (keep scripts but ignore if they contain tokens)
+# Push scripts with tokens
+push_with_token.ps1
+push_with_token.sh
+*.token
+*_token*

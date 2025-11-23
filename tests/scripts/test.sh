@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Test script for running JUnit tests
+# Run from tests/scripts/ directory
+
+cd "$(dirname "$0")"
+cd ../..
 
 echo "Running JUnit tests for Performance Analysis for Data Structures and Algorithms..."
 

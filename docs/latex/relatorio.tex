@@ -227,15 +227,23 @@ The test suite includes:
 
 \subsection{Test Execution}
 
-All tests can be executed using:
+All tests can be executed using scripts in the \texttt{tests/scripts/} directory:
 
 \begin{itemize}
-    \item \texttt{make test} (Linux/Mac)
-    \item \texttt{./test.sh} (Linux/Mac)
-    \item \texttt{test.bat} (Windows)
+    \item \texttt{tests/scripts/test.sh} (Linux/Mac/Git Bash)
+    \item \texttt{tests/scripts/test.bat} (Windows)
 \end{itemize}
 
-The test suite ensures that all implementations maintain correctness across different scenarios and edge cases, providing confidence in the experimental results presented in this report.
+The test suite uses JUnit 4 framework and validates:
+\begin{itemize}
+    \item Correctness of all algorithm implementations
+    \item Proper behavior of data structures under various conditions
+    \item Edge cases including null inputs, empty collections, and boundary conditions
+    \item Performance tracking mechanisms
+    \item Data integrity and consistency
+\end{itemize}
+
+The comprehensive test suite ensures that all implementations maintain correctness across different scenarios and edge cases, providing confidence in the experimental results presented in this report.
 
 \chapter{Sorting Algorithms Analysis}
 

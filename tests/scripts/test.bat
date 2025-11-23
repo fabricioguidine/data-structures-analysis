@@ -1,5 +1,9 @@
 @echo off
 REM Test script for running JUnit tests (Windows)
+REM Run from tests/scripts/ directory
+
+cd /d %~dp0
+cd ..\..
 
 echo Running JUnit tests for Performance Analysis for Data Structures and Algorithms...
 
