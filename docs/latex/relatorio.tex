@@ -1,43 +1,53 @@
 % Technical Report - Performance Analysis for Data Structures and Algorithms
 % Analysis of Sorting Algorithms, Hash Tables and Balanced Trees
 % Dataset: Book Depository
+% Template: UFJF Monografia Modelo
 
-\documentclass[
-    12pt,
-    a4paper,
-    openright,
-    oneside,
-    english,
-    brazil,
-    sumario=tradicional
-]{abntex2}
+\NeedsTeXFormat{LaTeX2e}
+\documentclass[a4paper,12pt]{monografia}
 
 % Packages
+\usepackage[portuguese, colorinlistoftodos, textsize=tiny]{todonotes}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage[mathcal]{eucal}
+\usepackage{latexsym}
+\usepackage[english]{babel}  
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{bm}
+\usepackage[portuguese,algoruled,longend, linesnumbered]{algorithm2e}
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{listings}
 \usepackage{xcolor}
-\usepackage{url}
-\usepackage{hyperref}
-\usepackage{amsmath}
-\usepackage{float}
-\usepackage[labelsep=period]{caption}
-\usepackage{subcaption}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[labelsep=period]{caption}
+\usepackage{hyperref}
+\usepackage{url}
 
-% Define fonte command for table sources (abnTeX compatible)
-\providecommand{\fonte}[1]{%
-    \vspace{-0.3cm}
-    \begin{flushleft}
-    \footnotesize\textit{Source: #1}
-    \end{flushleft}%
+% Hyperref configuration
+\hypersetup{
+    colorlinks,
+    debug=false,
+    linkcolor=black,  %%% color of tableofcontents, \ref, \footnote, etc
+    citecolor=black,  %%% color of \cite
+    urlcolor=black,   %%% color of \url e \href
+    bookmarksopen=true,
+    pdftitle={Performance Analysis for Data Structures and Algorithms - Book Depository Dataset},
+    pdfauthor={Débora Duarte, Fabrício Guidine, Walkíria Garcia},
+    pdfsubject={Algorithms and Data Structures Analysis},
+    pdfkeywords={algorithms, data structures, sorting, hash tables, balanced trees},
+    pdflang={en-US},
 }
 
-% Configuration
+% Bibliography
+\usepackage[alf,bibjustif]{abntex2cite}
+
+% Listings configuration for code
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -64,57 +74,109 @@
 
 \lstset{style=mystyle}
 
-% PDF Metadata
-\hypersetup{
-    pdftitle={Performance Analysis for Data Structures and Algorithms - Book Depository Dataset},
-    pdfauthor={Débora Duarte, Fabrício Guidine, Walkíria Garcia},
-    pdfsubject={Algorithms and Data Structures Analysis},
-    pdfkeywords={algorithms, data structures, sorting, hash tables, balanced trees},
-    pdfcreator={LaTeX with abnTeX2},
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    pdflang={en-US},
-}
+% New counter for comments
+\newcounter{todocounter}
+\newcommand{\comment}[2][]
+{\stepcounter{todocounter}\todo[caption={\thetodocounter: #2}, #1] 
+{\begin{spacing}{1}\thetodocounter: #2\end{spacing}}}
 
-% Document Information
-\titulo{Performance Analysis for Data Structures and Algorithms\\
-Using the Book Depository Dataset}
-\autor{Débora Duarte\\Fabrício Guidine\footnote{E-mail: fabricio.guidine@estudante.ufjf.br}\\Walkíria Garcia}
-\local{Juiz de Fora}
-\data{\today}
-\instituicao{%
-Universidade Federal de Juiz de Fora
-\par
-Department of Computer Science
-\par
-DCC012 - Data Structures II
+\reversemarginpar
+\setlength{\marginparwidth}{2.5cm}
+\lstloadlanguages{Java}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+% Mathematical notations
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{{\cal V}}
+
+% Define fonte command for table sources (abnTeX compatible)
+\providecommand{\fonte}[1]{%
+    \vspace{-0.3cm}
+    \begin{flushleft}
+    \footnotesize\textit{Source: #1}
+    \end{flushleft}%
 }
-\tipotrabalho{Course Project}
 
 % Index
 \makeindex
 
+% Include hyphenation
+\include{hifenizacao}
+
 \begin{document}
+\include{pretexto}
 
-% Front Matter
-\pretextual
-\imprimircapa
-\imprimirfolhaderosto
+%----------------------------Optional Dedication--------------
+\begin{dedicatoria}
+To the Department of Computer Science at UFJF.\\
+To the professors who contributed to our learning.
+\end{dedicatoria}
 
-\begin{resumo}
-This work presents a comparative analysis of sorting algorithms, implementation of hash tables, and evaluation of balanced data structures using the Book Depository dataset. The experiments evaluate the performance of QuickSort and HeapSort algorithms, implement hash tables to identify the most frequent authors, and compare the performance of Red-Black and B+ trees in insertion and search operations. The results demonstrate the characteristics of each data structure and algorithm, providing insights into their applicability in different scenarios.
-\end{resumo}
+%--------Abstract in Portuguese--------------
+\resumo{Resumo} Este trabalho apresenta uma análise comparativa de algoritmos de ordenação, implementação de tabelas hash e avaliação de estruturas de dados balanceadas utilizando o dataset Book Depository. Os experimentos avaliam o desempenho dos algoritmos QuickSort e HeapSort, implementam tabelas hash para identificar os autores mais frequentes e comparam o desempenho das árvores Red-Black e B+ nas operações de inserção e busca. Os resultados demonstram as características de cada estrutura de dados e algoritmo, fornecendo insights sobre sua aplicabilidade em diferentes cenários.
 
-\palavraschave{sorting algorithms, hash tables, balanced trees, performance analysis, data structures}
+\noindent \\ \textbf{Palavras-chave:} Algoritmos de ordenação, Tabelas hash, Árvores balanceadas, Análise de desempenho, Estruturas de dados.
 
+%-----------Abstract in English--------------
+\resumo{Abstract} This work presents a comparative analysis of sorting algorithms, implementation of hash tables, and evaluation of balanced data structures using the Book Depository dataset. The experiments evaluate the performance of QuickSort and HeapSort algorithms, implement hash tables to identify the most frequent authors, and compare the performance of Red-Black and B+ trees in insertion and search operations. The results demonstrate the characteristics of each data structure and algorithm, providing insights into their applicability in different scenarios.
+
+\noindent \\ \textbf{Keywords:} Sorting algorithms, Hash tables, Balanced trees, Performance analysis, Data structures.
+
+%-----------------------------------------------------------
+\agradecimento{Acknowledgments} \indent\indent 
+To everyone who contributed to the development of this work.\\
+To the Department of Computer Science at UFJF for support and guidance.\\
+To the professors of DCC012 - Data Structures II for their teachings.
+
+%---------------------- Optional Epigraph--------------
+\begin{epigrafe}
+``Continuous learning is the key to success in Computer Science.''\\
+\hfill Adapted
+\end{epigrafe}
+
+%----Table of Contents, List of Figures and Tables ------------
+\tableofcontents 
+\thispagestyle{empty} 
 \listoffigures
-\listoftables
-\sumario
+\thispagestyle{empty} 
+\listoftables 
+\thispagestyle{empty}
+
+%----List of Abbreviations ------------
+\chapter*{List of Abbreviations} 
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\doublespacing  
+\begin{tabular}{l l}
+DCC & Department of Computer Science \\
+UFJF & Universidade Federal de Juiz de Fora \\
+JVM & Java Virtual Machine \\
+JMH & Java Microbenchmark Harness \\
+B+ & B Plus Tree \\
+\end{tabular}
 
 % Main Content
-\textual
+\singlespacing
 
 \chapter{Introduction}
 
@@ -315,11 +377,11 @@ The sorting experiments were conducted with different input sizes. Each algorith
 
 \section{Results}
 
-The results from the sorting experiments are available in the \texttt{tests/sorting/} folder. The analysis was performed considering different input sizes to compare algorithm performance.
+The results from the sorting experiments are available in the \texttt{output/} folder. The analysis was performed considering different input sizes to compare algorithm performance.
 
 \subsection{QuickSort}
 
-The QuickSort results were obtained from files in \texttt{../../tests/sorting/quicksort/} and show:
+The QuickSort results show:
 
 \begin{itemize}
     \item Number of comparisons performed
@@ -327,35 +389,28 @@ The QuickSort results were obtained from files in \texttt{../../tests/sorting/qu
     \item Execution time in milliseconds
 \end{itemize}
 
-% Include results from ../../tests/sorting/quicksort/analysis.txt
-\IfFileExists{../../tests/sorting/quicksort/analysis.txt}{
-    \input{../../tests/sorting/quicksort/analysis.txt}
-}{
-    % Placeholder table structure for QuickSort results
-    \begin{table}[H]
-    \centering
-    \caption{QuickSort results for different input sizes}
-    \label{tab:quicksort-results}
-    \begin{tabular}{c c c c}
-        \toprule
-        \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
-        \midrule
-        1,000 & -- & -- & -- \\
-        5,000 & -- & -- & -- \\
-        10,000 & -- & -- & -- \\
-        50,000 & -- & -- & -- \\
-        100,000 & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The table will be automatically populated with data from \texttt{../../tests/sorting/quicksort/}.
-}
+% Placeholder table structure for QuickSort results
+\begin{table}[H]
+\centering
+\caption{QuickSort results for different input sizes}
+\label{tab:quicksort-results}
+\begin{tabular}{c c c c}
+    \toprule
+    \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
+    \midrule
+    1,000 & -- & -- & -- \\
+    5,000 & -- & -- & -- \\
+    10,000 & -- & -- & -- \\
+    50,000 & -- & -- & -- \\
+    100,000 & -- & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Results from conducted experiments.}
+\end{table}
 
 \subsection{HeapSort}
 
-The HeapSort results were obtained from files in \texttt{../../tests/sorting/heapsort/} and show:
+The HeapSort results show:
 
 \begin{itemize}
     \item Number of comparisons performed
@@ -363,31 +418,24 @@ The HeapSort results were obtained from files in \texttt{../../tests/sorting/hea
     \item Execution time in milliseconds
 \end{itemize}
 
-% Include results from ../../tests/sorting/heapsort/analysis.txt
-\IfFileExists{../../tests/sorting/heapsort/analysis.txt}{
-    \input{../../tests/sorting/heapsort/analysis.txt}
-}{
-    % Placeholder table structure for HeapSort results
-    \begin{table}[H]
-    \centering
-    \caption{HeapSort results for different input sizes}
-    \label{tab:heapsort-results}
-    \begin{tabular}{c c c c}
-        \toprule
-        \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
-        \midrule
-        1,000 & -- & -- & -- \\
-        5,000 & -- & -- & -- \\
-        10,000 & -- & -- & -- \\
-        50,000 & -- & -- & -- \\
-        100,000 & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The table will be automatically populated with data from \texttt{../../tests/sorting/heapsort/}.
-}
+% Placeholder table structure for HeapSort results
+\begin{table}[H]
+\centering
+\caption{HeapSort results for different input sizes}
+\label{tab:heapsort-results}
+\begin{tabular}{c c c c}
+    \toprule
+    \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
+    \midrule
+    1,000 & -- & -- & -- \\
+    5,000 & -- & -- & -- \\
+    10,000 & -- & -- & -- \\
+    50,000 & -- & -- & -- \\
+    100,000 & -- & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Results from conducted experiments.}
+\end{table}
 
 \section{Comparative Analysis}
 
@@ -411,31 +459,6 @@ To compare the sorting algorithms, a comparative analysis was performed consider
 \fonte{Theoretical and empirical algorithm analysis.}
 \end{table}
 
-% Include comparison results if available
-\IfFileExists{../../tests/sorting/comparison.tex}{
-    \input{../../tests/sorting/comparison.tex}
-}{
-    % Placeholder for empirical comparison table
-    \begin{table}[H]
-    \centering
-    \caption{Empirical comparison: QuickSort vs HeapSort}
-    \label{tab:sorting-empirical}
-    \begin{tabular}{c c c c c c}
-        \toprule
-        \textbf{n} & \multicolumn{2}{c}{\textbf{Time (ms)}} & \multicolumn{2}{c}{\textbf{Comparisons}} & \textbf{Best} \\
-        & QuickSort & HeapSort & QuickSort & HeapSort & Algorithm \\
-        \midrule
-        1,000 & -- & -- & -- & -- & -- \\
-        5,000 & -- & -- & -- & -- & -- \\
-        10,000 & -- & -- & -- & -- & -- \\
-        50,000 & -- & -- & -- & -- & -- \\
-        100,000 & -- & -- & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-}
-
 \chapter{Hash Tables Analysis}
 
 \section{Implementation}
@@ -444,7 +467,7 @@ The hash tables were implemented using open addressing with double hashing for c
 
 \section{Results}
 
-The results from the hash table experiments are available in the \texttt{tests/hashtable/} folder. The analysis includes:
+The results from the hash table experiments are available in the \texttt{output/} folder. The analysis includes:
 
 \begin{itemize}
     \item Performance of record insertion into the hash table
@@ -452,226 +475,152 @@ The results from the hash table experiments are available in the \texttt{tests/h
     \item Analysis of collisions and rehashing
 \end{itemize}
 
-% Include results from ../../tests/hashtable/analysis.txt
-\IfFileExists{../../tests/hashtable/analysis.txt}{
-    \input{../../tests/hashtable/analysis.txt}
-}{
-    % Placeholder table structure for Hash Table results
-    \begin{table}[H]
-    \centering
-    \caption{Hash Table performance for different sizes}
-    \label{tab:hashtable-performance}
-    \begin{tabular}{c c c c c}
-        \toprule
-        \textbf{Records} & \textbf{Insertion Time (ms)} & \textbf{Collisions} & \textbf{Load Factor} & \textbf{Search Time (ms)} \\
-        \midrule
-        1,000 & -- & -- & -- & -- \\
-        5,000 & -- & -- & -- & -- \\
-        10,000 & -- & -- & -- & -- \\
-        50,000 & -- & -- & -- & -- \\
-        100,000 & -- & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The table will be automatically populated with data from \texttt{../../tests/hashtable/}.
-}
+% Placeholder table structure for Hash Table results
+\begin{table}[H]
+\centering
+\caption{Hash Table performance for different sizes}
+\label{tab:hashtable-performance}
+\begin{tabular}{c c c c c}
+    \toprule
+    \textbf{Records} & \textbf{Insertion Time (ms)} & \textbf{Collisions} & \textbf{Load Factor} & \textbf{Search Time (ms)} \\
+    \midrule
+    1,000 & -- & -- & -- & -- \\
+    5,000 & -- & -- & -- & -- \\
+    10,000 & -- & -- & -- & -- \\
+    50,000 & -- & -- & -- & -- \\
+    100,000 & -- & -- & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Results from conducted experiments.}
+\end{table}
 
 \section{Most Frequent Authors Analysis}
 
-The results from identifying the most frequent authors are in \texttt{../../tests/hashtable/most_frequent_authors.txt}. Table \ref{tab:most-frequent-authors} presents the authors with the highest number of works in the dataset.
+The results from identifying the most frequent authors are in \texttt{output/saidaPart2.txt}. Table \ref{tab:most-frequent-authors} presents the authors with the highest number of works in the dataset.
 
-% Include results from ../../tests/hashtable/most_frequent_authors.txt
-\IfFileExists{../../tests/hashtable/most_frequent_authors.txt}{
-    \input{../../tests/hashtable/most_frequent_authors.txt}
-}{
-    % Placeholder table structure for most frequent authors
-    \begin{table}[H]
-    \centering
-    \caption{Top 10 most frequent authors in the dataset}
-    \label{tab:most-frequent-authors}
-    \begin{tabular}{c l c}
-        \toprule
-        \textbf{Rank} & \textbf{Author Name} & \textbf{Number of Works} \\
-        \midrule
-        1 & -- & -- \\
-        2 & -- & -- \\
-        3 & -- & -- \\
-        4 & -- & -- \\
-        5 & -- & -- \\
-        6 & -- & -- \\
-        7 & -- & -- \\
-        8 & -- & -- \\
-        9 & -- & -- \\
-        10 & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Analysis of Book Depository dataset using hash table.}
-    \end{table}
-    
-    \textbf{Note:} Complete data will be available after running the experiments and analyzing the author hash table.
-}
+% Placeholder table structure for most frequent authors
+\begin{table}[H]
+\centering
+\caption{Top 10 most frequent authors in the dataset}
+\label{tab:most-frequent-authors}
+\begin{tabular}{c l c}
+    \toprule
+    \textbf{Rank} & \textbf{Author Name} & \textbf{Number of Works} \\
+    \midrule
+    1 & -- & -- \\
+    2 & -- & -- \\
+    3 & -- & -- \\
+    4 & -- & -- \\
+    5 & -- & -- \\
+    6 & -- & -- \\
+    7 & -- & -- \\
+    8 & -- & -- \\
+    9 & -- & -- \\
+    10 & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Analysis of Book Depository dataset using hash table.}
+\end{table}
 
 \chapter{Balanced Data Structures Analysis}
 
 \section{Red-Black Tree}
 
-The results from the Red-Black tree experiments are in \texttt{../../tests/trees/redblack/}. Table \ref{tab:redblack-results} presents performance metrics for insertion and search operations.
+The results from the Red-Black tree experiments are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:redblack-results} presents performance metrics for insertion and search operations.
 
-% Include results from ../../tests/trees/redblack/analysis.txt
-\IfFileExists{../../tests/trees/redblack/analysis.txt}{
-    \input{../../tests/trees/redblack/analysis.txt}
-}{
-    % Placeholder table structure for Red-Black Tree results
-    \begin{table}[H]
-    \centering
-    \caption{Red-Black Tree performance}
-    \label{tab:redblack-results}
-    \begin{tabular}{c c c c c}
-        \toprule
-        \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Height} & \textbf{Rotations} \\
-        \midrule
-        1,000 & -- & -- & -- & -- \\
-        5,000 & -- & -- & -- & -- \\
-        10,000 & -- & -- & -- & -- \\
-        50,000 & -- & -- & -- & -- \\
-        100,000 & -- & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The table will be automatically populated with data from \texttt{../../tests/trees/redblack/}.
-}
+% Placeholder table structure for Red-Black Tree results
+\begin{table}[H]
+\centering
+\caption{Red-Black Tree performance}
+\label{tab:redblack-results}
+\begin{tabular}{c c c c c}
+    \toprule
+    \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Height} & \textbf{Rotations} \\
+    \midrule
+    1,000 & -- & -- & -- & -- \\
+    5,000 & -- & -- & -- & -- \\
+    10,000 & -- & -- & -- & -- \\
+    50,000 & -- & -- & -- & -- \\
+    100,000 & -- & -- & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Results from conducted experiments.}
+\end{table}
 
 \section{B+ Tree (d=2)}
 
-The results from the B+ tree experiments with degree 2 are in \texttt{../../tests/trees/bplustree/d2/}. Table \ref{tab:bplus-d2-results} presents the performance metrics.
+The results from the B+ tree experiments with degree 2 are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:bplus-d2-results} presents the performance metrics.
 
-% Include results from ../../tests/trees/bplustree/d2/analysis.txt
-\IfFileExists{../../tests/trees/bplustree/d2/analysis.txt}{
-    \input{../../tests/trees/bplustree/d2/analysis.txt}
-}{
-    % Placeholder table structure for B+ Tree (d=2) results
-    \begin{table}[H]
-    \centering
-    \caption{B+ Tree (d=2) performance}
-    \label{tab:bplus-d2-results}
-    \begin{tabular}{c c c c c}
-        \toprule
-        \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
-        \midrule
-        1,000 & -- & -- & -- & -- \\
-        5,000 & -- & -- & -- & -- \\
-        10,000 & -- & -- & -- & -- \\
-        50,000 & -- & -- & -- & -- \\
-        100,000 & -- & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The table will be automatically populated with data from \texttt{../../tests/trees/bplustree/d2/}.
-}
+% Placeholder table structure for B+ Tree (d=2) results
+\begin{table}[H]
+\centering
+\caption{B+ Tree (d=2) performance}
+\label{tab:bplus-d2-results}
+\begin{tabular}{c c c c c}
+    \toprule
+    \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
+    \midrule
+    1,000 & -- & -- & -- & -- \\
+    5,000 & -- & -- & -- & -- \\
+    10,000 & -- & -- & -- & -- \\
+    50,000 & -- & -- & -- & -- \\
+    100,000 & -- & -- & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Results from conducted experiments.}
+\end{table}
 
 \section{B+ Tree (d=20)}
 
-The results from the B+ tree experiments with degree 20 are in \texttt{../../tests/trees/bplustree/d20/}. Table \ref{tab:bplus-d20-results} presents the performance metrics.
+The results from the B+ tree experiments with degree 20 are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:bplus-d20-results} presents the performance metrics.
 
-% Include results from ../../tests/trees/bplustree/d20/analysis.txt
-\IfFileExists{../../tests/trees/bplustree/d20/analysis.txt}{
-    \input{../../tests/trees/bplustree/d20/analysis.txt}
-}{
-    % Placeholder table structure for B+ Tree (d=20) results
-    \begin{table}[H]
-    \centering
-    \caption{B+ Tree (d=20) performance}
-    \label{tab:bplus-d20-results}
-    \begin{tabular}{c c c c c}
-        \toprule
-        \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
-        \midrule
-        1,000 & -- & -- & -- & -- \\
-        5,000 & -- & -- & -- & -- \\
-        10,000 & -- & -- & -- & -- \\
-        50,000 & -- & -- & -- & -- \\
-        100,000 & -- & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The table will be automatically populated with data from \texttt{../../tests/trees/bplustree/d20/}.
-}
+% Placeholder table structure for B+ Tree (d=20) results
+\begin{table}[H]
+\centering
+\caption{B+ Tree (d=20) performance}
+\label{tab:bplus-d20-results}
+\begin{tabular}{c c c c c}
+    \toprule
+    \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
+    \midrule
+    1,000 & -- & -- & -- & -- \\
+    5,000 & -- & -- & -- & -- \\
+    10,000 & -- & -- & -- & -- \\
+    50,000 & -- & -- & -- & -- \\
+    100,000 & -- & -- & -- & -- \\
+    \bottomrule
+\end{tabular}
+\fonte{Results from conducted experiments.}
+\end{table}
 
 \section{Comparative Analysis}
 
-A complete comparative analysis of the results is available in \texttt{../../tests/trees/comparison/}. Table \ref{tab:trees-comparison} presents a comparative summary between different tree structures.
+A complete comparative analysis of the results is available in the output files. Table \ref{tab:trees-comparison} presents a comparative summary between different tree structures.
 
-% Include comparison tables and graphs from ../../tests/trees/comparison/
-\IfFileExists{../../tests/trees/comparison/comparison.tex}{
-    \input{../../tests/trees/comparison/comparison.tex}
-}{
-    % Placeholder table structure for tree comparison
-    \begin{table}[H]
-    \centering
-    \caption{Comparative analysis: Red-Black Tree vs B+ Trees}
-    \label{tab:trees-comparison}
-    \begin{tabular}{l c c c}
-        \toprule
-        \textbf{Metric} & \textbf{Red-Black Tree} & \textbf{B+ (d=2)} & \textbf{B+ (d=20)} \\
-        \midrule
-        Insertion Complexity & $O(\log n)$ & $O(\log n)$ & $O(\log n)$ \\
-        Search Complexity & $O(\log n)$ & $O(\log n)$ & $O(\log n)$ \\
-        Space Complexity & $O(n)$ & $O(n)$ & $O(n)$ \\
-        Maximum Height & $\leq 2\log(n+1)$ & $\leq \log_d(n)$ & $\leq \log_d(n)$ \\
-        Optimization & Main memory & Disk & Disk (higher degree) \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Theoretical and empirical structure analysis.}
-    \end{table}
-    
-    % Empirical comparison table
-    \begin{table}[H]
-    \centering
-    \caption{Empirical comparison: Insertion and search time (ms)}
-    \label{tab:trees-empirical}
-    \begin{tabular}{c c c c c c c}
-        \toprule
-        \textbf{Operations} & \multicolumn{2}{c}{\textbf{Red-Black}} & \multicolumn{2}{c}{\textbf{B+ (d=2)}} & \multicolumn{2}{c}{\textbf{B+ (d=20)}} \\
-        & Insertion & Search & Insertion & Search & Insertion & Search \\
-        \midrule
-        1,000 & -- & -- & -- & -- & -- & -- \\
-        5,000 & -- & -- & -- & -- & -- & -- \\
-        10,000 & -- & -- & -- & -- & -- & -- \\
-        50,000 & -- & -- & -- & -- & -- & -- \\
-        100,000 & -- & -- & -- & -- & -- & -- \\
-        \bottomrule
-    \end{tabular}
-    \fonte{Results from conducted experiments.}
-    \end{table}
-    
-    \textbf{Note:} Complete values will be available after running the experiments. The tables will be automatically populated with data from \texttt{../../tests/trees/comparison/}.
-}
+% Placeholder table structure for tree comparison
+\begin{table}[H]
+\centering
+\caption{Comparative analysis: Red-Black Tree vs B+ Trees}
+\label{tab:trees-comparison}
+\begin{tabular}{l c c c}
+    \toprule
+    \textbf{Metric} & \textbf{Red-Black} & \textbf{B+ (d=2)} & \textbf{B+ (d=20)} \\
+    \midrule
+    Insertion Complexity & $O(\log n)$ & $O(\log n)$ & $O(\log n)$ \\
+    Search Complexity & $O(\log n)$ & $O(\log n)$ & $O(\log n)$ \\
+    Space Complexity & $O(n)$ & $O(n)$ & $O(n)$ \\
+    Maximum Height & $\leq 2\log(n+1)$ & $\leq \log_d(n)$ & $\leq \log_d(n)$ \\
+    Optimization & Main memory & Disk & Disk (higher degree) \\
+    \bottomrule
+\end{tabular}
+\fonte{Theoretical and empirical structure analysis.}
+\end{table}
 
 \chapter{Results and Discussion}
 
 \section{Results Summary}
 
-This section presents a summary of the results obtained from the conducted experiments. The complete data is organized in the \texttt{../../tests/} folder and was analyzed for each type of structure and algorithm.
-
-\subsection{Sorting Algorithms Summary}
-
-The complete results are available in \texttt{../../tests/sorting/results/}.
-
-\subsection{Hash Tables Summary}
-
-The complete results are available in \texttt{../../tests/hashtable/results/}.
-
-\subsection{Tree Structures Summary}
-
-The complete results are available in \texttt{../../tests/trees/results/}.
+This section presents a summary of the results obtained from the conducted experiments. The complete data is organized in the \texttt{output/} folder and was analyzed for each type of structure and algorithm.
 
 \section{Data Interpretation}
 
@@ -681,7 +630,6 @@ The data interpretation considered:
     \item Theoretical complexity vs. empirical performance
     \item Impact of data size on metrics
     \item Comparison between different structures and algorithms
-    \item Analysis of results available in \texttt{../../tests/results/}
 \end{itemize}
 
 \section{Experiment Limitations}
@@ -690,9 +638,8 @@ The limitations identified in the experiments include:
 
 \begin{itemize}
     \item Results depend on the execution environment (JVM)
-    \item Input sizes limited to values in the \texttt{../../input/entrada.txt} file
+    \item Input sizes limited to values in the \texttt{input/entrada.txt} file
     \item Time metrics may vary between executions
-    \item Detailed results available in \texttt{../../tests/results/}
 \end{itemize}
 
 \chapter{Conclusions and Future Work}
@@ -718,22 +665,11 @@ Possible extensions of this work include:
     \item Performance regression testing framework
 \end{itemize}
 
-% Back Matter
-\postextual
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\singlespacing
+\bibliographystyle{abntex2-alf}
 \bibliography{referencias}
 
-% Appendix
-\begin{apendicesenv}
-
-\chapter{Complete Results}
-
-% Include full results tables here
-
-\chapter{Source Code}
-
-% Include relevant code snippets if needed
-
-\end{apendicesenv}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
