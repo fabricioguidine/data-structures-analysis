@@ -127,3 +127,5 @@ tokens/
 github_token*
 git_token*
 gh_token*
+
+# Push scripts with tokens (keep scripts but ignore if they contain tokens)
