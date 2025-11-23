@@ -28,14 +28,20 @@
 \usepackage[labelsep=period]{caption}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{tabularx}
+
+% Two-column layout
+\setlength{\columnsep}{1cm}
 
 % Hyperref configuration
 \hypersetup{
     colorlinks,
     debug=false,
-    linkcolor=black,  %%% color of tableofcontents, \ref, \footnote, etc
-    citecolor=black,  %%% color of \cite
-    urlcolor=black,   %%% color of \url e \href
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black,
     bookmarksopen=true,
     pdftitle={Performance Analysis for Data Structures and Algorithms - Book Depository Dataset},
     pdfauthor={Débora Duarte, Fabrício Guidine, Walkíria Garcia},
@@ -110,7 +116,7 @@
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\V}{{\cal V}}
 
-% Define fonte command for table sources (abnTeX compatible)
+% Define fonte command for table sources
 \providecommand{\fonte}[1]{%
     \vspace{-0.3cm}
     \begin{flushleft}
@@ -133,65 +139,18 @@ Using the Book Depository Dataset}
 
 \local{Juiz de Fora}
 
-\date{\today}
+\date{November 25, 2020}
 
 \institution{Universidade Federal de Juiz de Fora}
 
 \course{Department of Computer Science\\
 DCC012 - Data Structures II}
 
-% Include pretext (title page)
+% Include pretext (title page only)
 \include{pretexto}
 
-%----------------------------Optional Dedication--------------
-\begin{dedicatoria}
-To the Department of Computer Science at UFJF.\\
-To the professors who contributed to our learning.
-\end{dedicatoria}
-
-%--------Abstract in Portuguese--------------
-\resumo{Resumo} Este trabalho apresenta uma análise comparativa de algoritmos de ordenação, implementação de tabelas hash e avaliação de estruturas de dados balanceadas utilizando o dataset Book Depository. Os experimentos avaliam o desempenho dos algoritmos QuickSort e HeapSort, implementam tabelas hash para identificar os autores mais frequentes e comparam o desempenho das árvores Red-Black e B+ nas operações de inserção e busca. Os resultados demonstram as características de cada estrutura de dados e algoritmo, fornecendo insights sobre sua aplicabilidade em diferentes cenários.
-
-\noindent \\ \textbf{Palavras-chave:} Algoritmos de ordenação, Tabelas hash, Árvores balanceadas, Análise de desempenho, Estruturas de dados.
-
-%-----------Abstract in English--------------
-\resumo{Abstract} This work presents a comparative analysis of sorting algorithms, implementation of hash tables, and evaluation of balanced data structures using the Book Depository dataset. The experiments evaluate the performance of QuickSort and HeapSort algorithms, implement hash tables to identify the most frequent authors, and compare the performance of Red-Black and B+ trees in insertion and search operations. The results demonstrate the characteristics of each data structure and algorithm, providing insights into their applicability in different scenarios.
-
-\noindent \\ \textbf{Keywords:} Sorting algorithms, Hash tables, Balanced trees, Performance analysis, Data structures.
-
-%-----------------------------------------------------------
-\agradecimento{Acknowledgments} \indent\indent 
-To everyone who contributed to the development of this work.\\
-To the Department of Computer Science at UFJF for support and guidance.\\
-To the professors of DCC012 - Data Structures II for their teachings.
-
-%---------------------- Optional Epigraph--------------
-\begin{epigrafe}
-``Continuous learning is the key to success in Computer Science.''\\
-\hfill Adapted
-\end{epigrafe}
-
-%----Table of Contents, List of Figures and Tables ------------
-\tableofcontents 
-\thispagestyle{empty} 
-\listoffigures
-\thispagestyle{empty} 
-\listoftables 
-\thispagestyle{empty}
-
-%----List of Abbreviations ------------
-\chapter*{List of Abbreviations} 
-\addcontentsline{toc}{chapter}{List of Abbreviations}
-\doublespacing  
-\begin{tabular}{l l}
-DCC & Department of Computer Science \\
-UFJF & Universidade Federal de Juiz de Fora \\
-JVM & Java Virtual Machine \\
-JMH & Java Microbenchmark Harness \\
-B+ & B Plus Tree \\
-\end{tabular}
-
-% Main Content
+% Main Content - Two columns
+\begin{multicols}{2}
 \singlespacing
 
 \chapter{Introduction}
@@ -234,31 +193,31 @@ This report is organized as follows:
 
 \subsection{QuickSort}
 
-QuickSort is an efficient sorting algorithm that uses the divide-and-conquer strategy. It works by selecting a pivot element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. QuickSort has an average time complexity of $O(n \log n)$, but its worst-case complexity is $O(n^2)$.
+QuickSort is an efficient sorting algorithm that uses the divide-and-conquer strategy \cite{cormen2009}. It works by selecting a pivot element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. QuickSort has an average time complexity of $O(n \log n)$, but its worst-case complexity is $O(n^2)$.
 
 \subsection{HeapSort}
 
-HeapSort uses the heap property to sort elements. It first builds a max-heap from the input array, then repeatedly extracts the maximum element from the heap and places it at the end of the sorted array. HeapSort has a guaranteed time complexity of $O(n \log n)$ for all cases, making it more predictable than QuickSort, though typically slower in practice.
+HeapSort uses the heap property to sort elements \cite{knuth1998}. It first builds a max-heap from the input array, then repeatedly extracts the maximum element from the heap and places it at the end of the sorted array. HeapSort has a guaranteed time complexity of $O(n \log n)$ for all cases, making it more predictable than QuickSort, though typically slower in practice.
 
 \section{Hash Tables}
 
-Hash tables are data structures that allow fast access to elements through hash functions. They provide average-case constant time complexity $O(1)$ for insertion, deletion, and search operations. This project implements hash tables using open addressing with double hashing to resolve collisions.
+Hash tables are data structures that allow fast access to elements through hash functions \cite{cormen2009}. They provide average-case constant time complexity $O(1)$ for insertion, deletion, and search operations. This project implements hash tables using open addressing with double hashing to resolve collisions.
 
 \section{Balanced Data Structures}
 
 \subsection{Red-Black Tree}
 
-Red-Black trees are self-balancing binary search trees where each node has an extra bit to store its color (red or black). These trees maintain balance by ensuring that no path from root to leaf is more than twice as long as any other path, resulting in guaranteed $O(\log n)$ time complexity for insertion, deletion, and search operations.
+Red-Black trees are self-balancing binary search trees where each node has an extra bit to store its color (red or black) \cite{cormen2009}. These trees maintain balance by ensuring that no path from root to leaf is more than twice as long as any other path, resulting in guaranteed $O(\log n)$ time complexity for insertion, deletion, and search operations.
 
 \subsection{B+ Tree}
 
-B+ trees are data structures optimized for disk storage and are commonly used in database systems. They are similar to B-trees but store all data in leaf nodes, with internal nodes containing only keys for navigation. B+ trees maintain a balanced structure with a minimum degree $d$, where each internal node has at least $d$ and at most $2d$ children. This structure provides efficient sequential access and is particularly suitable for large datasets.
+B+ trees are data structures optimized for disk storage and are commonly used in database systems \cite{knuth1998}. They are similar to B-trees but store all data in leaf nodes, with internal nodes containing only keys for navigation. B+ trees maintain a balanced structure with a minimum degree $d$, where each internal node has at least $d$ and at most $2d$ children. This structure provides efficient sequential access and is particularly suitable for large datasets.
 
 \chapter{Methodology}
 
 \section{Dataset}
 
-The Book Depository dataset was obtained from Kaggle and contains information about books, including:
+The Book Depository dataset was obtained from Kaggle \cite{kaggle_dataset} and contains information about books, including:
 
 \begin{itemize}
     \item Author data and their works
@@ -405,11 +364,12 @@ The QuickSort results show:
     \item Execution time in milliseconds
 \end{itemize}
 
-% Placeholder table structure for QuickSort results
-\begin{table}[H]
+% Fixed table for QuickSort results
+\begin{table*}[t]
 \centering
 \caption{QuickSort results for different input sizes}
 \label{tab:quicksort-results}
+\small
 \begin{tabular}{c c c c}
     \toprule
     \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
@@ -422,7 +382,7 @@ The QuickSort results show:
     \bottomrule
 \end{tabular}
 \fonte{Results from conducted experiments.}
-\end{table}
+\end{table*}
 
 \subsection{HeapSort}
 
@@ -434,11 +394,12 @@ The HeapSort results show:
     \item Execution time in milliseconds
 \end{itemize}
 
-% Placeholder table structure for HeapSort results
-\begin{table}[H]
+% Fixed table for HeapSort results
+\begin{table*}[t]
 \centering
 \caption{HeapSort results for different input sizes}
 \label{tab:heapsort-results}
+\small
 \begin{tabular}{c c c c}
     \toprule
     \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
@@ -451,16 +412,17 @@ The HeapSort results show:
     \bottomrule
 \end{tabular}
 \fonte{Results from conducted experiments.}
-\end{table}
+\end{table*}
 
 \section{Comparative Analysis}
 
 To compare the sorting algorithms, a comparative analysis was performed considering performance metrics. Table \ref{tab:sorting-comparison} presents a comparative summary between QuickSort and HeapSort.
 
-\begin{table}[H]
+\begin{table*}[t]
 \centering
 \caption{Comparative analysis between QuickSort and HeapSort}
 \label{tab:sorting-comparison}
+\small
 \begin{tabular}{l c c c}
     \toprule
     \textbf{Metric} & \textbf{QuickSort} & \textbf{HeapSort} & \textbf{Observations} \\
@@ -473,7 +435,7 @@ To compare the sorting algorithms, a comparative analysis was performed consider
     \bottomrule
 \end{tabular}
 \fonte{Theoretical and empirical algorithm analysis.}
-\end{table}
+\end{table*}
 
 \chapter{Hash Tables Analysis}
 
@@ -491,11 +453,12 @@ The results from the hash table experiments are available in the \texttt{output/
     \item Analysis of collisions and rehashing
 \end{itemize}
 
-% Placeholder table structure for Hash Table results
-\begin{table}[H]
+% Fixed table for Hash Table results
+\begin{table*}[t]
 \centering
 \caption{Hash Table performance for different sizes}
 \label{tab:hashtable-performance}
+\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Records} & \textbf{Insertion Time (ms)} & \textbf{Collisions} & \textbf{Load Factor} & \textbf{Search Time (ms)} \\
@@ -508,17 +471,18 @@ The results from the hash table experiments are available in the \texttt{output/
     \bottomrule
 \end{tabular}
 \fonte{Results from conducted experiments.}
-\end{table}
+\end{table*}
 
 \section{Most Frequent Authors Analysis}
 
 The results from identifying the most frequent authors are in \texttt{output/saidaPart2.txt}. Table \ref{tab:most-frequent-authors} presents the authors with the highest number of works in the dataset.
 
-% Placeholder table structure for most frequent authors
-\begin{table}[H]
+% Fixed table for most frequent authors
+\begin{table*}[t]
 \centering
 \caption{Top 10 most frequent authors in the dataset}
 \label{tab:most-frequent-authors}
+\small
 \begin{tabular}{c l c}
     \toprule
     \textbf{Rank} & \textbf{Author Name} & \textbf{Number of Works} \\
@@ -536,7 +500,7 @@ The results from identifying the most frequent authors are in \texttt{output/sai
     \bottomrule
 \end{tabular}
 \fonte{Analysis of Book Depository dataset using hash table.}
-\end{table}
+\end{table*}
 
 \chapter{Balanced Data Structures Analysis}
 
@@ -544,11 +508,12 @@ The results from identifying the most frequent authors are in \texttt{output/sai
 
 The results from the Red-Black tree experiments are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:redblack-results} presents performance metrics for insertion and search operations.
 
-% Placeholder table structure for Red-Black Tree results
-\begin{table}[H]
+% Fixed table for Red-Black Tree results
+\begin{table*}[t]
 \centering
 \caption{Red-Black Tree performance}
 \label{tab:redblack-results}
+\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Height} & \textbf{Rotations} \\
@@ -561,17 +526,18 @@ The results from the Red-Black tree experiments are in \texttt{output/saidaInser
     \bottomrule
 \end{tabular}
 \fonte{Results from conducted experiments.}
-\end{table}
+\end{table*}
 
 \section{B+ Tree (d=2)}
 
 The results from the B+ tree experiments with degree 2 are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:bplus-d2-results} presents the performance metrics.
 
-% Placeholder table structure for B+ Tree (d=2) results
-\begin{table}[H]
+% Fixed table for B+ Tree (d=2) results
+\begin{table*}[t]
 \centering
 \caption{B+ Tree (d=2) performance}
 \label{tab:bplus-d2-results}
+\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
@@ -584,17 +550,18 @@ The results from the B+ tree experiments with degree 2 are in \texttt{output/sai
     \bottomrule
 \end{tabular}
 \fonte{Results from conducted experiments.}
-\end{table}
+\end{table*}
 
 \section{B+ Tree (d=20)}
 
 The results from the B+ tree experiments with degree 20 are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:bplus-d20-results} presents the performance metrics.
 
-% Placeholder table structure for B+ Tree (d=20) results
-\begin{table}[H]
+% Fixed table for B+ Tree (d=20) results
+\begin{table*}[t]
 \centering
 \caption{B+ Tree (d=20) performance}
 \label{tab:bplus-d20-results}
+\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
@@ -607,17 +574,18 @@ The results from the B+ tree experiments with degree 20 are in \texttt{output/sa
     \bottomrule
 \end{tabular}
 \fonte{Results from conducted experiments.}
-\end{table}
+\end{table*}
 
 \section{Comparative Analysis}
 
 A complete comparative analysis of the results is available in the output files. Table \ref{tab:trees-comparison} presents a comparative summary between different tree structures.
 
-% Placeholder table structure for tree comparison
-\begin{table}[H]
+% Fixed table for tree comparison
+\begin{table*}[t]
 \centering
 \caption{Comparative analysis: Red-Black Tree vs B+ Trees}
 \label{tab:trees-comparison}
+\small
 \begin{tabular}{l c c c}
     \toprule
     \textbf{Metric} & \textbf{Red-Black} & \textbf{B+ (d=2)} & \textbf{B+ (d=20)} \\
@@ -630,7 +598,7 @@ A complete comparative analysis of the results is available in the output files.
     \bottomrule
 \end{tabular}
 \fonte{Theoretical and empirical structure analysis.}
-\end{table}
+\end{table*}
 
 \chapter{Results and Discussion}
 
@@ -681,11 +649,11 @@ Possible extensions of this work include:
     \item Performance regression testing framework
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{multicols}
+
+% Bibliography
 \singlespacing
 \bibliographystyle{abntex2-alf}
 \bibliography{referencias}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
