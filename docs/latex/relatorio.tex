@@ -28,12 +28,12 @@
 \usepackage[labelsep=period]{caption}
 \usepackage{hyperref}
 \usepackage{url}
-\usepackage{multicol}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{caption}
 
-% Two-column layout
-\setlength{\columnsep}{1cm}
+% Table caption configuration - centered
+\captionsetup[table]{justification=centering}
 
 % Hyperref configuration
 \hypersetup{
@@ -149,8 +149,7 @@ DCC012 - Data Structures II}
 % Include pretext (title page only)
 \include{pretexto}
 
-% Main Content - Two columns
-\begin{multicols}{2}
+% Main Content - Single column
 \singlespacing
 
 \chapter{Introduction}
@@ -365,11 +364,10 @@ The QuickSort results show:
 \end{itemize}
 
 % Fixed table for QuickSort results
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{QuickSort results for different input sizes}
 \label{tab:quicksort-results}
-\small
 \begin{tabular}{c c c c}
     \toprule
     \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
@@ -395,11 +393,10 @@ The HeapSort results show:
 \end{itemize}
 
 % Fixed table for HeapSort results
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{HeapSort results for different input sizes}
 \label{tab:heapsort-results}
-\small
 \begin{tabular}{c c c c}
     \toprule
     \textbf{Size (n)} & \textbf{Comparisons} & \textbf{Swaps} & \textbf{Time (ms)} \\
@@ -418,11 +415,10 @@ The HeapSort results show:
 
 To compare the sorting algorithms, a comparative analysis was performed considering performance metrics. Table \ref{tab:sorting-comparison} presents a comparative summary between QuickSort and HeapSort.
 
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{Comparative analysis between QuickSort and HeapSort}
 \label{tab:sorting-comparison}
-\small
 \begin{tabular}{l c c c}
     \toprule
     \textbf{Metric} & \textbf{QuickSort} & \textbf{HeapSort} & \textbf{Observations} \\
@@ -454,11 +450,10 @@ The results from the hash table experiments are available in the \texttt{output/
 \end{itemize}
 
 % Fixed table for Hash Table results
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{Hash Table performance for different sizes}
 \label{tab:hashtable-performance}
-\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Records} & \textbf{Insertion Time (ms)} & \textbf{Collisions} & \textbf{Load Factor} & \textbf{Search Time (ms)} \\
@@ -478,11 +473,10 @@ The results from the hash table experiments are available in the \texttt{output/
 The results from identifying the most frequent authors are in \texttt{output/saidaPart2.txt}. Table \ref{tab:most-frequent-authors} presents the authors with the highest number of works in the dataset.
 
 % Fixed table for most frequent authors
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{Top 10 most frequent authors in the dataset}
 \label{tab:most-frequent-authors}
-\small
 \begin{tabular}{c l c}
     \toprule
     \textbf{Rank} & \textbf{Author Name} & \textbf{Number of Works} \\
@@ -509,11 +503,10 @@ The results from identifying the most frequent authors are in \texttt{output/sai
 The results from the Red-Black tree experiments are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:redblack-results} presents performance metrics for insertion and search operations.
 
 % Fixed table for Red-Black Tree results
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{Red-Black Tree performance}
 \label{tab:redblack-results}
-\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Height} & \textbf{Rotations} \\
@@ -533,11 +526,10 @@ The results from the Red-Black tree experiments are in \texttt{output/saidaInser
 The results from the B+ tree experiments with degree 2 are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:bplus-d2-results} presents the performance metrics.
 
 % Fixed table for B+ Tree (d=2) results
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{B+ Tree (d=2) performance}
 \label{tab:bplus-d2-results}
-\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
@@ -557,11 +549,10 @@ The results from the B+ tree experiments with degree 2 are in \texttt{output/sai
 The results from the B+ tree experiments with degree 20 are in \texttt{output/saidaInsercao.txt} and \texttt{output/saidaBusca.txt}. Table \ref{tab:bplus-d20-results} presents the performance metrics.
 
 % Fixed table for B+ Tree (d=20) results
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{B+ Tree (d=20) performance}
 \label{tab:bplus-d20-results}
-\small
 \begin{tabular}{c c c c c}
     \toprule
     \textbf{Operations} & \textbf{Insertion Time (ms)} & \textbf{Search Time (ms)} & \textbf{Average Level} & \textbf{Leaf Nodes} \\
@@ -581,11 +572,10 @@ The results from the B+ tree experiments with degree 20 are in \texttt{output/sa
 A complete comparative analysis of the results is available in the output files. Table \ref{tab:trees-comparison} presents a comparative summary between different tree structures.
 
 % Fixed table for tree comparison
-\begin{table*}[t]
+\begin{table}[H]
 \centering
 \caption{Comparative analysis: Red-Black Tree vs B+ Trees}
 \label{tab:trees-comparison}
-\small
 \begin{tabular}{l c c c}
     \toprule
     \textbf{Metric} & \textbf{Red-Black} & \textbf{B+ (d=2)} & \textbf{B+ (d=20)} \\
@@ -648,8 +638,6 @@ Possible extensions of this work include:
     \item Integration with continuous integration (CI) systems for automated testing
     \item Performance regression testing framework
 \end{itemize}
-
-\end{multicols}
 
 % Bibliography
 \singlespacing
