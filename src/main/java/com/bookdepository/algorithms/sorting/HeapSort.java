@@ -51,7 +51,7 @@ public class HeapSort {
         long endTime = System.currentTimeMillis();
         long executionTime = endTime - startTime;
 
-        return new PerformanceResult(comparisons, swaps, executionTime);
+        return new PerformanceResult(records == null ? 0 : records.length, comparisons, swaps, executionTime);
     }
 
     /**
