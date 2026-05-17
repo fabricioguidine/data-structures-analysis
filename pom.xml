@@ -33,7 +33,7 @@
         <jmh.version>1.37</jmh.version>
 
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
-        <maven.surefire.version>3.2.5</maven.surefire.version>
+        <maven.surefire.version>3.5.5</maven.surefire.version>
         <maven.failsafe.version>3.2.5</maven.failsafe.version>
         <maven.jar.plugin.version>3.4.1</maven.jar.plugin.version>
         <maven.assembly.plugin.version>3.7.1</maven.assembly.plugin.version>
