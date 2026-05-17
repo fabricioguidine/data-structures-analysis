@@ -126,6 +126,15 @@ build/
 # Keep JAR in project root for releases
 !bookdepository-ds-analysis.jar
 
+# Claude Code transcripts and prompt files (never commit)
+CLAUDE.md
+**/CLAUDE.md
+.claude/
+
+# JaCoCo coverage output
+target/site/jacoco/
+*.exec
+
 # Tokens and secrets
 *.token
 *.key
