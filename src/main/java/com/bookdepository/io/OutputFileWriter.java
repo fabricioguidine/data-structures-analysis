@@ -11,6 +11,12 @@ import java.util.List;
 
 /**
  * Appends sorting experiment results to {@code output/output.txt}.
+ *
+ * <p>The on-disk format follows the convention used by the test fixture
+ * {@code src/test/resources/test-output.txt}: the algorithm name is written
+ * on its own line, followed by one comma-separated row per input size in
+ * the form {@code size,comparisons,swaps,time_ms}. A blank line separates
+ * algorithm blocks.
  */
 public final class OutputFileWriter {
 
@@ -34,14 +40,21 @@ public final class OutputFileWriter {
     }
 
     /**
-     * Appends one block per result to the output file.
+     * Appends one algorithm block to the output file.
      *
-     * @param results        results to write
-     * @param algorithmLabel label printed before the metrics
+     * <p>The block starts with the algorithm label on its own line, followed
+     * by {@code size,comparisons,swaps,time_ms} for each result, and finishes
+     * with a trailing blank line.
+     *
+     * @param results        results to write, one per input size
+     * @param algorithmLabel header written before the metrics
      * @throws IOException if the file cannot be written
      */
     public static void writeSortingResults(List<PerformanceResult> results, String algorithmLabel)
             throws IOException {
+        if (results == null || algorithmLabel == null) {
+            return;
+        }
         Path file = outputFile();
         Files.createDirectories(file.getParent());
         try (BufferedWriter writer = Files.newBufferedWriter(
@@ -49,16 +62,16 @@ public final class OutputFileWriter {
                 StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE,
                 StandardOpenOption.APPEND)) {
+            writer.write(algorithmLabel);
+            writer.newLine();
             for (PerformanceResult result : results) {
-                writer.write(algorithmLabel + ":");
-                writer.newLine();
-                writer.write("  comparisons=" + result.getComparisons());
-                writer.newLine();
-                writer.write("  swaps=" + result.getSwaps());
-                writer.newLine();
-                writer.write("  time_ms=" + result.getExecutionTime());
+                writer.write(result.getSize() + ","
+                        + result.getComparisons() + ","
+                        + result.getSwaps() + ","
+                        + result.getExecutionTime());
                 writer.newLine();
             }
+            writer.newLine();
         }
     }
 
