@@ -2,9 +2,12 @@
 
 > A comprehensive performance analysis of fundamental data structures and algorithms using the Book Depository dataset
 
-[![Java](https://img.shields.io/badge/Java-8%2B-orange.svg)](https://www.oracle.com/java/)
+[![CI](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml)
+[![LaTeX](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml)
+[![codecov](https://codecov.io/gh/fabricioguidine/data-structures-analysis/branch/main/graph/badge.svg)](https://codecov.io/gh/fabricioguidine/data-structures-analysis)
+[![Java](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://adoptium.net/)
 [![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-Academic-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 This project provides a comprehensive performance analysis of fundamental data structures and algorithms using the [Book Depository dataset](https://www.kaggle.com/sp1thas/book-depository-dataset) from Kaggle. It implements and empirically evaluates sorting algorithms (QuickSort, HeapSort), hash tables, and balanced tree structures (Red-Black Tree, B+ Trees) with real-world book and author data.
 
