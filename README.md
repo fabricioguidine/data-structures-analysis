@@ -2,12 +2,7 @@
 
 <img src=".github/assets/banner.svg" alt="data-structures-analysis banner" width="100%" />
 
-[![CI](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml)
-[![LaTeX](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml)
-[![codecov](https://codecov.io/gh/fabricioguidine/data-structures-analysis/branch/master/graph/badge.svg)](https://codecov.io/gh/fabricioguidine/data-structures-analysis)
-[![Java](https://img.shields.io/badge/Java-17+-orange.svg?logo=openjdk&logoColor=white)](https://openjdk.org)
-[![Maven](https://img.shields.io/badge/build-Maven-C71A36.svg?logo=apachemaven&logoColor=white)](https://maven.apache.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml) [![LaTeX](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml) [![codecov](https://codecov.io/gh/fabricioguidine/data-structures-analysis/branch/master/graph/badge.svg)](https://codecov.io/gh/fabricioguidine/data-structures-analysis) [![Java](https://img.shields.io/badge/Java-17+-orange.svg?logo=openjdk&logoColor=white)](https://openjdk.org) [![Maven](https://img.shields.io/badge/build-Maven-C71A36.svg?logo=apachemaven&logoColor=white)](https://maven.apache.org) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 </div>
 
