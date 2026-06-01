@@ -1,29 +1,10 @@
-<div align="center">
+# data-structures-analysis
 
-<img src=".github/assets/banner.svg" alt="data-structures-analysis banner" width="100%" />
+Empirical performance analysis of fundamental data structures and sorting algorithms in Java, benchmarked over the [Book Depository dataset](https://www.kaggle.com/datasets/sp1thas/book-depository-dataset). Each structure and algorithm is instrumented to record runtime, comparisons, swaps, and collisions across increasing input sizes, feeding a LaTeX report under `docs/latex/`.
 
-[![CI](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml) [![LaTeX](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml) [![codecov](https://codecov.io/gh/fabricioguidine/data-structures-analysis/branch/master/graph/badge.svg)](https://codecov.io/gh/fabricioguidine/data-structures-analysis) [![Java](https://img.shields.io/badge/Java-17+-orange.svg?logo=openjdk&logoColor=white)](https://openjdk.org) [![Maven](https://img.shields.io/badge/build-Maven-C71A36.svg?logo=apachemaven&logoColor=white)](https://maven.apache.org) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml) [![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://openjdk.org) [![Build: Maven](https://img.shields.io/badge/build-Maven-C71A36.svg)](https://maven.apache.org) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-</div>
-
-> Empirical performance analysis of fundamental data structures and sorting algorithms in Java.
-
-This repository implements and benchmarks classic data structures and sorting algorithms over the
-[Book Depository dataset](https://www.kaggle.com/datasets/sp1thas/book-depository-dataset) from Kaggle.
-Each structure and algorithm is instrumented to record runtime, comparisons, swaps, and collisions across
-increasing input sizes, and the results feed a LaTeX report (`docs/latex/relatorio.tex`).
-
-## Table of Contents
-
-- [Data structures](#data-structures)
-- [Methodology](#methodology)
-- [Requirements](#requirements)
-- [Build and run](#build-and-run)
-- [Results](#results)
-- [Project structure](#project-structure)
-- [License](#license)
-
-## Data structures
+## What it measures
 
 All implementations live under `src/main/java/com/bookdepository`.
 
@@ -42,25 +23,7 @@ Two experiment entry points drive the measurements:
 | Sorting | `experiments/SortingExperiment.java` | Times QuickSort vs. HeapSort over each configured input size |
 | Hash table | `experiments/HashTableExperiment.java` | Counts and ranks the most frequent authors via the hash table |
 
-## Methodology
-
-Sample sizes are read from `input/input.txt`, records are loaded once from the dataset CSV, and each
-algorithm is run per size while a `PerformanceResult` captures timing and operation counts. Results are
-written as text blocks to `output/`, then summarized in the LaTeX report.
-
-```mermaid
-flowchart LR
-    A[Book Depository CSV] --> B[FileReader]
-    B --> C{Experiment}
-    C -->|SortingExperiment| D[QuickSort / HeapSort]
-    C -->|HashTableExperiment| E[AuthorHashTable]
-    D --> F[PerformanceResult<br/>time, comparisons, swaps]
-    E --> G[author counts<br/>collisions, load factor]
-    F --> H[OutputFileWriter -> output/output.txt]
-    G --> I[Part2OutputWriter -> output/outputPart2.txt]
-    H --> J[LaTeX report docs/latex/relatorio.tex]
-    I --> J
-```
+Sample sizes are read from `input/input.txt`, records are loaded once from the dataset CSV, and each algorithm runs per size while a `PerformanceResult` captures timing and operation counts.
 
 ## Requirements
 
@@ -114,8 +77,7 @@ Experiments write plain-text result blocks consumed by the report:
 - `output/output.txt` — per-size timing, comparison, and swap counts for QuickSort and HeapSort.
 - `output/outputPart2.txt` — ranked most-frequent authors with hash table collision and load-factor stats.
 
-The full written analysis, including the complexity charts, is in the compiled report produced from
-`docs/latex/relatorio.tex` (uploaded as the `relatorio-pdf` artifact by the `LaTeX` workflow).
+The full written analysis, including the complexity charts, is in the compiled report produced from `docs/latex/relatorio.tex` (uploaded as the `relatorio-pdf` artifact by the `LaTeX` workflow).
 
 ## Project structure
 
