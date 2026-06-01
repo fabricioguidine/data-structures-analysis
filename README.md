@@ -209,8 +209,9 @@ mvnw.cmd -B verify        # Windows
 
 `*Test` classes run in the `test` phase (Surefire); `*IntegrationTest` end-to-end classes
 run in the `verify` phase (Failsafe). The CI matrix runs `./mvnw -B test` on
-`ubuntu-latest`, `macos-latest` and `windows-latest` against JDK 17 and 21, and a dedicated
-`verify` job runs the end-to-end tests, Spotless, Checkstyle and coverage.
+`ubuntu-latest`, `macos-latest` and `windows-latest` against JDK 17 and 21; a dedicated
+`e2e` job runs `./mvnw -B verify` (unit + end-to-end tests + JaCoCo coverage) on Ubuntu/JDK 21,
+and an informational `lint` job runs Spotless and Checkstyle.
 
 ### Testing Frameworks
 

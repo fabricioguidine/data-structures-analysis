@@ -116,5 +116,6 @@ Test fixtures (`sample-records.csv`, `sample-authors.csv`, etc.) live in
 - **JaCoCo** produces coverage; **Spotless** and **Checkstyle** enforce formatting/style in the
   `verify` phase.
 - **CI** (`.github/workflows/ci.yml`) runs `./mvnw -B test` on a matrix of
-  `ubuntu-latest`, `macos-latest`, `windows-latest` x JDK 17 and 21, plus a `verify` job
-  (lint + e2e + coverage) on Ubuntu/JDK 21.
+  `ubuntu-latest`, `macos-latest`, `windows-latest` x JDK 17 and 21, an `e2e` job running
+  `./mvnw -B verify` (unit + end-to-end + coverage) on Ubuntu/JDK 21, and an informational
+  `lint` job (Spotless + Checkstyle).

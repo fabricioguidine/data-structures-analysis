@@ -66,18 +66,20 @@ public class HeapSort {
         int left = 2 * i + 1; // Left child
         int right = 2 * i + 2; // Right child
 
-        // Compare with left child
+        // Compare with left child. shouldSwap(a, b) is true when a precedes b
+        // in the desired ascending order; for a max-heap we promote the child
+        // that should come *after* the current largest, i.e. negate the test.
         if (left < n) {
             comparisons++;
-            if (shouldSwap(records[left], records[largest])) {
+            if (shouldSwap(records[largest], records[left])) {
                 largest = left;
             }
         }
 
-        // Compare with right child
+        // Compare with right child (same max-heap orientation as above).
         if (right < n) {
             comparisons++;
-            if (shouldSwap(records[right], records[largest])) {
+            if (shouldSwap(records[largest], records[right])) {
                 largest = right;
             }
         }
