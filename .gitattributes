@@ -1,0 +1,15 @@
+# Normalize line endings on checkin; checkout native per-OS.
+* text=auto eol=lf
+
+# Maven wrapper scripts must keep platform-appropriate endings.
+mvnw        text eol=lf
+mvnw.cmd    text eol=crlf
+
+# Binary assets — never normalize.
+*.jar   binary
+*.class binary
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.gz    binary
+*.zip   binary

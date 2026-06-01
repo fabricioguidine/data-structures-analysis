@@ -41,16 +41,16 @@ This repository contains three main experimental parts that analyze different as
 
 Before you begin, ensure you have the following installed:
 
-- **Java Development Kit (JDK)** 8 or higher
+- **Java Development Kit (JDK)** 17 or 21 (the project targets Java 17 and is tested on 17 and 21)
   - Verify installation: `java -version`
-- **Maven** 3.6 or higher (for dependency management and building)
-  - Verify installation: `mvn -version`
-  - Download from: [Maven Download](https://maven.apache.org/download.cgi)
-- **Python** 3.7 or higher
-  - Verify installation: `python --version`
-- **Kaggle API** credentials for dataset access
-  - Sign up at [Kaggle](https://www.kaggle.com/)
-  - Follow [API setup instructions](https://www.kaggle.com/docs/api)
+- **Maven is _not_ required** — the repository ships the **Maven Wrapper** (`mvnw` / `mvnw.cmd`),
+  which downloads a pinned Maven the first time you build. No global Maven install needed.
+
+Optional, only for downloading the Kaggle dataset:
+
+- **Python** 3.7 or higher (`python --version`)
+- **Kaggle API** credentials — sign up at [Kaggle](https://www.kaggle.com/) and follow the
+  [API setup instructions](https://www.kaggle.com/docs/api)
 
 ## 🚀 Getting Started
 
@@ -147,51 +147,39 @@ The script will download the dataset files to the `data/` directory:
 └── LICENSE
 ```
 
-### Building the Project
+### Building the Project (cross-platform)
 
-This project uses **Maven** for dependency management and build automation.
+The project builds **identically on Linux, macOS and Windows** through the bundled
+**Maven Wrapper**. You do **not** need a local Maven install — the wrapper downloads a
+pinned Maven version on first use. Source encoding is UTF-8 and all file access uses
+relative / classpath paths, so no command differs between operating systems except the
+wrapper launcher name.
 
-#### Prerequisites
+| Task | Linux / macOS | Windows (PowerShell or CMD) |
+| --- | --- | --- |
+| Compile + run tests | `./mvnw -B test` | `mvnw.cmd -B test` |
+| Full verify (tests + e2e + lint + coverage) | `./mvnw -B verify` | `mvnw.cmd -B verify` |
+| Build the JAR | `./mvnw -B clean package` | `mvnw.cmd -B clean package` |
+| Skip tests | `./mvnw -B clean package -DskipTests` | `mvnw.cmd -B clean package -DskipTests` |
 
-- **Java Development Kit (JDK)** 8 or higher
-- **Maven** 3.6 or higher
-  - Verify installation: `mvn -version`
-  - Download from: https://maven.apache.org/download.cgi
+> First run only: if `mvnw` is not executable after cloning on Linux/macOS, run
+> `chmod +x mvnw`.
 
-#### Building with Maven
+**Generate the runnable JAR** (uber-jar with dependencies), then copy it to the project root:
 
-**Build and run tests:**
+**Linux/macOS:**
 ```bash
-mvn clean package
-```
-
-**Build without tests:**
-```bash
-mvn clean package -DskipTests
-```
-
-**Run tests only:**
-```bash
-mvn test
-```
-
-**Generate JAR file:**
-
-After building with Maven, create the executable JAR in the project root:
-
-**Linux/Mac/Git Bash:**
-```bash
-mvn clean package && cp target/bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
+./mvnw -B clean package && cp target/bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
 ```
 
 **Windows PowerShell:**
 ```powershell
-mvn clean package; Copy-Item target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
+.\mvnw.cmd -B clean package; Copy-Item target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
 ```
 
 **Windows CMD:**
 ```cmd
-mvn clean package && copy target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
+mvnw.cmd -B clean package && copy target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
 ```
 
 The JAR file `bookdepository-ds-analysis.jar` will be created in the project root.
@@ -202,76 +190,73 @@ This project includes a comprehensive JUnit test suite to validate all implement
 
 ### Running Tests
 
-**Using Maven (recommended):**
+Use the Maven Wrapper so the toolchain is identical on every OS:
+
 ```bash
-# Run all tests
-mvn test
+# Linux / macOS - unit tests
+./mvnw -B test
 
-# Run specific test class
-mvn test -Dtest=RecordTest
+# Windows - unit tests
+mvnw.cmd -B test
 
-# Run tests with verbose output
-mvn test -X
+# Full pipeline: unit + end-to-end (failsafe) tests + lint + JaCoCo coverage
+./mvnw -B verify          # Linux / macOS
+mvnw.cmd -B verify        # Windows
+
+# A single test class
+./mvnw -B test -Dtest=BinarySearchTreeTest
 ```
 
-**Note:** Maven automatically downloads all testing framework dependencies. The manual `lib/` directory approach is no longer required when using Maven.
+`*Test` classes run in the `test` phase (Surefire); `*IntegrationTest` end-to-end classes
+run in the `verify` phase (Failsafe). The CI matrix runs `./mvnw -B test` on
+`ubuntu-latest`, `macos-latest` and `windows-latest` against JDK 17 and 21, and a dedicated
+`verify` job runs the end-to-end tests, Spotless, Checkstyle and coverage.
 
 ### Testing Frameworks
 
 This project uses modern Java testing frameworks:
-- **JUnit 5 (Jupiter)**: Primary unit testing framework
-- **Mockito**: Mocking framework for isolating components
-- **AssertJ**: Fluent assertions library
-- **JMH (Java Microbenchmark Harness)**: Precise microbenchmarking for performance tests
-- **Hamcrest**: Matcher library for expressive assertions
+- **JUnit 5 (Jupiter)**: unit and parameterized testing framework
+- **AssertJ**: fluent assertions library
+- **Mockito**: mocking framework for isolating components
+- **JMH (Java Microbenchmark Harness)**: precise microbenchmarking for performance tests
 
 ### Test Coverage
 
-The comprehensive test suite includes:
+Each data structure / algorithm present in the source tree has a focused test class that
+exercises its real behaviour:
 
-#### Unit Tests
-- **Sorting Algorithms**: `QuickSortTest.java` and `HeapSortTest.java`
-  - Edge cases: empty arrays, null arrays, single elements
-  - Input variations: sorted, reverse sorted, random order
-  - Special cases: duplicate ranks, zero ranks
-  - Parameterized tests for various input sizes (10, 100, 1000, 10000, 50000 elements)
+#### Data-structure unit tests
+- **`structures/bst/BinarySearchTreeTest.java`** - insertion (with de-duplication of equal
+  keys), `contains`, **in-order traversal returns a sorted sequence**, and height for both
+  degenerate (skewed) and balanced insertion orders.
+- **`structures/hashtable/AuthorHashTableTest.java`** - get-after-put, repeated inserts
+  increment frequency, **collision handling and resize keep every entry retrievable**, load
+  factor stays under threshold, invalid input rejected.
+- **`structures/linkedlist/LinkedListTest.java`** - append/prepend ordering, `indexOf`,
+  **insert/remove/traverse** (head, middle, tail), out-of-bounds access, and bulk
+  parameterized sizes.
 
-#### Integration Tests
-- **SortingExperimentIntegrationTest.java**: End-to-end experiment validation
-- **HashTableExperimentIntegrationTest.java**: Hash table experiment validation
+#### Sorting unit tests
+- **`algorithms/sorting/QuickSortTest.java`** and **`algorithms/sorting/HeapSortTest.java`** -
+  edge cases (empty/null/single), sorted/reverse/random inputs, duplicate and zero ranks, and
+  parameterized sizes.
 
-#### Performance Tests
-- **PerformanceTest.java**: Performance benchmarks for sorting algorithms
-  - Execution time across different input sizes
-  - Algorithm comparison (QuickSort vs HeapSort)
-  - Performance with different input distributions
-  - Memory efficiency tests
+#### End-to-end / integration tests
+- **`experiments/SortingExperimentIntegrationTest.java`** - runs QuickSort and HeapSort over
+  generated records end-to-end and asserts the output is sorted with non-trivial
+  comparison/swap counts and consistent results across runs.
+- **`experiments/HashTableExperimentIntegrationTest.java`** - full Part II pipeline: loads the
+  `sample-records.csv` / `sample-authors.csv` fixtures from the classpath, counts author
+  frequencies in the hash table, ranks them, **writes the report via `Part2OutputWriter` and
+  reads it back**, asserting the ranked, persisted output. Uses only classpath/relative UTF-8
+  paths so it passes identically on Linux, macOS and Windows.
 
-#### JMH Benchmarks
-- **SortingBenchmark.java**: JMH microbenchmarks for precise performance measurement
-  - Multiple input sizes (100, 1000, 10000, 50000 elements)
-  - Warmup and measurement iterations configured
+#### Performance & benchmark classes
+- **`performance/PerformanceTest.java`** - timing comparisons across input sizes.
+- **`benchmark/SortingBenchmark.java`** - JMH microbenchmarks.
 
-#### Test Utilities
-- **TestUtils.java**: Utility methods for generating test data
-- **ResourceLoader.java**: Utility for loading test resources
-- **AssertionUtils.java**: Custom assertion methods
-
-### Running Specific Tests
-
-```bash
-# Run specific test class
-mvn test -Dtest=QuickSortTest
-
-# Run JMH benchmarks
-mvn test -Dtest=SortingBenchmark
-
-# Run performance tests
-mvn test -Dtest=PerformanceTest
-
-# Run integration tests
-mvn test -Dtest=*IntegrationTest
-```
+#### Test utilities
+- **`test/TestUtils.java`**, **`test/ResourceLoader.java`**, **`test/AssertionUtils.java`**.
 
 All test classes are located in `src/test/java/com/bookdepository/`.
 
