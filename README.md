@@ -1,517 +1,146 @@
-# Performance Analysis for Data Structures and Algorithms
+<div align="center">
 
-> A comprehensive performance analysis of fundamental data structures and algorithms using the Book Depository dataset
+<img src=".github/assets/banner.svg" alt="data-structures-analysis banner" width="100%" />
 
 [![CI](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/ci.yml)
 [![LaTeX](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml/badge.svg)](https://github.com/fabricioguidine/data-structures-analysis/actions/workflows/latex.yml)
-[![codecov](https://codecov.io/gh/fabricioguidine/data-structures-analysis/branch/main/graph/badge.svg)](https://codecov.io/gh/fabricioguidine/data-structures-analysis)
-[![Java](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://adoptium.net/)
-[![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
+[![codecov](https://codecov.io/gh/fabricioguidine/data-structures-analysis/branch/master/graph/badge.svg)](https://codecov.io/gh/fabricioguidine/data-structures-analysis)
+[![Java](https://img.shields.io/badge/Java-17+-orange.svg?logo=openjdk&logoColor=white)](https://openjdk.org)
+[![Maven](https://img.shields.io/badge/build-Maven-C71A36.svg?logo=apachemaven&logoColor=white)](https://maven.apache.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This project provides a comprehensive performance analysis of fundamental data structures and algorithms using the [Book Depository dataset](https://www.kaggle.com/sp1thas/book-depository-dataset) from Kaggle. It implements and empirically evaluates sorting algorithms (QuickSort, HeapSort), hash tables, and balanced tree structures (Red-Black Tree, B+ Trees) with real-world book and author data.
+</div>
 
-## 🎯 Overview
+> Empirical performance analysis of fundamental data structures and sorting algorithms in Java.
 
-This repository contains three main experimental parts that analyze different aspects of data structures:
+This repository implements and benchmarks classic data structures and sorting algorithms over the
+[Book Depository dataset](https://www.kaggle.com/datasets/sp1thas/book-depository-dataset) from Kaggle.
+Each structure and algorithm is instrumented to record runtime, comparisons, swaps, and collisions across
+increasing input sizes, and the results feed a LaTeX report (`docs/latex/relatorio.tex`).
 
-- **Part I**: Sorting algorithm performance analysis (QuickSort and HeapSort)
-- **Part II**: Most frequent authors identification using hash tables
-- **Part III**: Balanced tree structures performance evaluation (Red-Black Tree, B+ Trees)
+## Table of Contents
 
-## 📋 Table of Contents
+- [Data structures](#data-structures)
+- [Methodology](#methodology)
+- [Requirements](#requirements)
+- [Build and run](#build-and-run)
+- [Results](#results)
+- [Project structure](#project-structure)
+- [License](#license)
 
-- [Prerequisites](#-prerequisites)
-- [Getting Started](#-getting-started)
-  - [Dataset Setup](#dataset-setup)
-  - [Project Structure](#project-structure)
-  - [Building the Project](#building-the-project)
-- [Usage](#-usage)
-- [JAR File](#-jar-file)
-  - [Part I: Sorting Algorithms](#part-i-sorting-algorithms)
-  - [Part II: Hash Tables](#part-ii-hash-tables)
-  - [Part III: Tree Structures](#part-iii-tree-structures)
-- [Project Structure](#-project-structure)
-- [Documentation](#-documentation)
-- [Contributing](#-contributing)
-- [Authors](#-authors)
-- [License](#-license)
+## Data structures
 
-## 🔧 Prerequisites
+All implementations live under `src/main/java/com/bookdepository`.
 
-Before you begin, ensure you have the following installed:
+| Structure / Algorithm | File | Operations / metrics measured |
+| --- | --- | --- |
+| Binary search tree | `structures/bst/BinarySearchTree.java` | `insert`, `contains`, `inOrder`, `height`, `size` |
+| Hash table (separate chaining) | `structures/hashtable/AuthorHashTable.java` | `insertOrIncrement`, `find`, load factor, collision count |
+| Singly linked list | `structures/linkedlist/LinkedList.java` | `append`, `prepend`, `indexOf`, `remove`, `get` |
+| QuickSort | `algorithms/sorting/QuickSort.java` | runtime, comparison count, swap count |
+| HeapSort | `algorithms/sorting/HeapSort.java` | runtime, comparison count, swap count |
 
-- **Java Development Kit (JDK)** 8 or higher
-  - Verify installation: `java -version`
-- **Maven** 3.6 or higher (for dependency management and building)
-  - Verify installation: `mvn -version`
-  - Download from: [Maven Download](https://maven.apache.org/download.cgi)
-- **Python** 3.7 or higher
-  - Verify installation: `python --version`
-- **Kaggle API** credentials for dataset access
-  - Sign up at [Kaggle](https://www.kaggle.com/)
-  - Follow [API setup instructions](https://www.kaggle.com/docs/api)
+Two experiment entry points drive the measurements:
 
-## 🚀 Getting Started
+| Experiment | File | Purpose |
+| --- | --- | --- |
+| Sorting | `experiments/SortingExperiment.java` | Times QuickSort vs. HeapSort over each configured input size |
+| Hash table | `experiments/HashTableExperiment.java` | Counts and ranks the most frequent authors via the hash table |
 
-### Dataset Setup
+## Methodology
 
-The dataset is available on [Kaggle](https://www.kaggle.com/sp1thas/book-depository-dataset). Download it using the provided Python script:
+Sample sizes are read from `input/input.txt`, records are loaded once from the dataset CSV, and each
+algorithm is run per size while a `PerformanceResult` captures timing and operation counts. Results are
+written as text blocks to `output/`, then summarized in the LaTeX report.
 
-**Step 1:** Install Python dependencies
+```mermaid
+flowchart LR
+    A[Book Depository CSV] --> B[FileReader]
+    B --> C{Experiment}
+    C -->|SortingExperiment| D[QuickSort / HeapSort]
+    C -->|HashTableExperiment| E[AuthorHashTable]
+    D --> F[PerformanceResult<br/>time, comparisons, swaps]
+    E --> G[author counts<br/>collisions, load factor]
+    F --> H[OutputFileWriter -> output/output.txt]
+    G --> I[Part2OutputWriter -> output/outputPart2.txt]
+    H --> J[LaTeX report docs/latex/relatorio.tex]
+    I --> J
+```
 
-```bash
+## Requirements
+
+- JDK 17 or newer (CI builds on Temurin 17 and 21).
+- Apache Maven 3.6+.
+- Python 3 with the [Kaggle](https://www.kaggle.com/docs/api) CLI (only to download the dataset).
+
+## Build and run
+
+Download the dataset (requires Kaggle API credentials):
+
+```powershell
 pip install -r scripts/requirements.txt
-```
-
-**Step 2:** Configure Kaggle API credentials
-
-Place your `kaggle.json` file in:
-- **Windows**: `C:\Users\<username>\.kaggle\kaggle.json`
-- **Linux/Mac**: `~/.kaggle/kaggle.json`
-
-Or set environment variables:
-```bash
-export KAGGLE_USERNAME=your_username
-export KAGGLE_KEY=your_api_key
-```
-
-**Step 3:** Download the dataset
-
-```bash
 python scripts/download_dataset.py
 ```
 
-The script will download the dataset files to the `data/` directory:
-- `authors.csv` - Author information
-- `dataset_simp_sem_descricao.csv` - Book records
+This places `dataset_simp_sem_descricao.csv` and `authors.csv` under `data/`.
 
-### Project Structure
+Build, run the full test suite (unit + integration) with coverage, and apply Spotless/Checkstyle:
 
-```
-.
-├── data/                        # Dataset files (downloaded from Kaggle)
-│   ├── authors.csv
-│   └── dataset_simp_sem_descricao.csv
-├── docs/                        # Documentation
-│   ├── requirements.pdf        # Project requirements (PDF)
-│   └── latex/                  # LaTeX technical report
-│       ├── relatorio.tex       # Main LaTeX document
-│       ├── referencias.bib     # Bibliography
-│       └── Makefile            # Build automation
-├── input/                       # Input files for experiments
-│   └── input.txt               # Test sizes configuration
-├── output/                      # Output files from experiments (generated by execution)
-│   ├── output.txt              # Part I results (sorting algorithms)
-│   ├── outputPart2.txt         # Part II results (hash tables)
-│   ├── outputInsertion.txt     # Part III insertion results
-│   └── outputSearch.txt        # Part III search results
-├── scripts/                     # Utility scripts
-│   ├── download_dataset.py     # Kaggle dataset downloader
-│   └── requirements.txt        # Python dependencies
-├── src/                         # Source code
-│   └── main/
-│       └── java/
-│           └── com/bookdepository/
-│               ├── model/           # Domain entities
-│               │   ├── Record.java
-│               │   └── Author.java
-│               ├── algorithms/      # Algorithm implementations
-│               │   └── sorting/
-│               │       ├── QuickSort.java
-│               │       └── HeapSort.java
-│               ├── structures/      # Data structure implementations
-│               │   ├── hashtable/
-│               │   │   ├── RecordHashTable.java
-│               │   │   └── AuthorHashTable.java
-│               │   └── tree/
-│               │       ├── redblack/
-│               │       └── bplustree/
-│               ├── experiments/     # Benchmarking applications
-│               │   ├── SortingExperiment.java
-│               │   ├── HashTableExperiment.java
-│               │   └── TreeExperiment.java
-│               ├── io/              # File I/O utilities
-│               │   ├── FileReader.java
-│               │   ├── OutputFileWriter.java
-│               │   ├── Part2OutputWriter.java
-│               │   └── PerformanceResult.java
-│               └── utils/           # Utility functions
-├── src/                         # Source code
-│   ├── main/java/              # Main source code
-│   └── test/java/              # Test source code (JUnit tests)
-├── .gitignore
-├── pom.xml                      # Maven project configuration
-├── bookdepository-ds-analysis.jar  # Generated JAR file (see JAR generation section)
-├── README.md
-└── LICENSE
-```
-
-### Building the Project
-
-This project uses **Maven** for dependency management and build automation.
-
-#### Prerequisites
-
-- **Java Development Kit (JDK)** 8 or higher
-- **Maven** 3.6 or higher
-  - Verify installation: `mvn -version`
-  - Download from: https://maven.apache.org/download.cgi
-
-#### Building with Maven
-
-**Build and run tests:**
-```bash
-mvn clean package
-```
-
-**Build without tests:**
-```bash
-mvn clean package -DskipTests
-```
-
-**Run tests only:**
-```bash
-mvn test
-```
-
-**Generate JAR file:**
-
-After building with Maven, create the executable JAR in the project root:
-
-**Linux/Mac/Git Bash:**
-```bash
-mvn clean package && cp target/bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
-```
-
-**Windows PowerShell:**
 ```powershell
-mvn clean package; Copy-Item target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
+mvn verify
 ```
 
-**Windows CMD:**
-```cmd
-mvn clean package && copy target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
-```
+Build a runnable fat JAR:
 
-The JAR file `bookdepository-ds-analysis.jar` will be created in the project root.
-
-## 🧪 Testing
-
-This project includes a comprehensive JUnit test suite to validate all implementations.
-
-### Running Tests
-
-**Using Maven (recommended):**
-```bash
-# Run all tests
-mvn test
-
-# Run specific test class
-mvn test -Dtest=RecordTest
-
-# Run tests with verbose output
-mvn test -X
-```
-
-**Note:** Maven automatically downloads all testing framework dependencies. The manual `lib/` directory approach is no longer required when using Maven.
-
-### Testing Frameworks
-
-This project uses modern Java testing frameworks:
-- **JUnit 5 (Jupiter)**: Primary unit testing framework
-- **Mockito**: Mocking framework for isolating components
-- **AssertJ**: Fluent assertions library
-- **JMH (Java Microbenchmark Harness)**: Precise microbenchmarking for performance tests
-- **Hamcrest**: Matcher library for expressive assertions
-
-### Test Coverage
-
-The comprehensive test suite includes:
-
-#### Unit Tests
-- **Sorting Algorithms**: `QuickSortTest.java` and `HeapSortTest.java`
-  - Edge cases: empty arrays, null arrays, single elements
-  - Input variations: sorted, reverse sorted, random order
-  - Special cases: duplicate ranks, zero ranks
-  - Parameterized tests for various input sizes (10, 100, 1000, 10000, 50000 elements)
-
-#### Integration Tests
-- **SortingExperimentIntegrationTest.java**: End-to-end experiment validation
-- **HashTableExperimentIntegrationTest.java**: Hash table experiment validation
-
-#### Performance Tests
-- **PerformanceTest.java**: Performance benchmarks for sorting algorithms
-  - Execution time across different input sizes
-  - Algorithm comparison (QuickSort vs HeapSort)
-  - Performance with different input distributions
-  - Memory efficiency tests
-
-#### JMH Benchmarks
-- **SortingBenchmark.java**: JMH microbenchmarks for precise performance measurement
-  - Multiple input sizes (100, 1000, 10000, 50000 elements)
-  - Warmup and measurement iterations configured
-
-#### Test Utilities
-- **TestUtils.java**: Utility methods for generating test data
-- **ResourceLoader.java**: Utility for loading test resources
-- **AssertionUtils.java**: Custom assertion methods
-
-### Running Specific Tests
-
-```bash
-# Run specific test class
-mvn test -Dtest=QuickSortTest
-
-# Run JMH benchmarks
-mvn test -Dtest=SortingBenchmark
-
-# Run performance tests
-mvn test -Dtest=PerformanceTest
-
-# Run integration tests
-mvn test -Dtest=*IntegrationTest
-```
-
-All test classes are located in `src/test/java/com/bookdepository/`.
-
-## 💻 Usage
-
-### Part I: Sorting Algorithms
-
-Analyzes the performance of QuickSort and HeapSort algorithms on book records.
-
-**Metrics measured:**
-- Number of key comparisons
-- Number of record copies/swaps
-- Total execution time (milliseconds)
-
-**Run the experiment:**
-
-```bash
-cd src/main/java
-javac -d ../../../build com/bookdepository/experiments/SortingExperiment.java
-java -cp ../../../build com.bookdepository.experiments.SortingExperiment
-```
-
-**Output:** Results are written to `output/output.txt`
-
-### Part II: Hash Tables
-
-Implements hash tables to identify the most frequent authors in a set of books.
-
-**Data structures used:**
-- **RecordHashTable**: Hash table for records using open addressing with double hashing
-- **AuthorHashTable**: Hash table for authors with frequency tracking
-
-**Run the experiment:**
-
-```bash
-cd src/main/java
-javac -d ../../../build com/bookdepository/experiments/HashTableExperiment.java
-java -cp ../../../build com.bookdepository.experiments.HashTableExperiment
-```
-
-The program will prompt for the number `N` of top authors to display.
-
-**Output:** Results are written to `output/outputPart2.txt`
-
-### Part III: Tree Structures
-
-Evaluates the performance of balanced tree structures for insertion and search operations.
-
-**Structures analyzed:**
-- **Red-Black Tree**: Self-balancing binary search tree
-- **B+ Tree (d=2)**: B+ tree with minimum degree 2
-- **B+ Tree (d=20)**: B+ tree with minimum degree 20
-
-**Performance metrics:**
-- Insertion statistics (comparisons, swaps, time)
-- Search statistics (comparisons, swaps, time)
-
-**Run the experiment:**
-
-```bash
-cd src/main/java
-javac -d ../../../build com/bookdepository/experiments/TreeExperiment.java
-java -cp ../../../build com.bookdepository.experiments.TreeExperiment
-```
-
-**Output:** 
-- Insertion results: `output/outputInsertion.txt`
-- Search results: `output/outputSearch.txt`
-
-### Input Format
-
-Create `input/input.txt` with the following format:
-
-```
-N
-value1
-value2
-...
-valueN
-```
-
-Where `N` is the number of test cases, and each value represents the number of records to process.
-
-**Example:**
-```
-5
-1000
-5000
-10000
-50000
-100000
-```
-
-## 📁 Project Structure
-
-### Package Organization
-
-```
-com.bookdepository/
-├── model/              # Domain entities
-├── algorithms/         # Reusable algorithms
-│   └── sorting/        # Sorting algorithms
-├── structures/         # Data structure implementations
-│   ├── hashtable/      # Hash tables
-│   └── tree/           # Tree structures
-├── experiments/        # Benchmarking applications
-├── io/                 # File I/O utilities
-└── utils/              # Utility functions
-```
-
-### Key Components
-
-- **Model Layer**: Domain entities (`Record`, `Author`)
-- **Algorithms**: Sorting algorithms with performance tracking
-- **Data Structures**: Hash tables and balanced trees
-- **Experiments**: Benchmarking applications for each part
-- **I/O Utilities**: File reading and output writing utilities
-
-## 📚 Documentation
-
-### Requirements
-
-The complete project requirements are available in:
-- **PDF**: `docs/requirements.pdf`
-
-### Technical Report
-
-A comprehensive technical report in LaTeX (using abnTeX2) analyzing all experimental results is located in `docs/latex/`:
-
-- **Main document**: `docs/latex/relatorio.tex`
-- **Bibliography**: `docs/latex/referencias.bib`
-- **Compiled PDF**: `docs/latex/relatorio.pdf` (needs to be compiled)
-- **Build instructions**: See `docs/latex/README.md`
-
-The report analyzes results from the `tests/` directory, including:
-- Sorting algorithm performance (`tests/sorting/`)
-- Hash table experiments (`tests/hashtable/`)
-- Tree structure benchmarks (`tests/trees/`)
-
-**To compile the PDF report:**
-
-Compile manually using your preferred LaTeX editor or online service (e.g., Overleaf).
-
-**Recommended:** Use Overleaf (online LaTeX editor - no installation needed): https://www.overleaf.com/
-
-**Note:** The compiled PDF (`relatorio.pdf`) should be saved in the `docs/latex/` folder after compilation.
-
-## 🤝 Contributing
-
-This is an academic project for DCC012 - Data Structures II at Universidade Federal de Juiz de Fora. Contributions are welcome for bug fixes and improvements.
-
-## 👥 Authors
-
-- [@DeboraIRDuarte](https://github.com/DeboraIRDuarte)
-- [@fabricioguidine](https://github.com/fabricioguidine)
-- [@walkiriagss](https://github.com/walkiriagss)
-
-## 📄 License
-
-This project is part of the coursework for **DCC012 - Data Structures II** at **Universidade Federal de Juiz de Fora**.
-
----
-
-## 📊 Dataset Schema
-
-Each book record contains the following fields:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `authors` | `List<String>` | List of author IDs |
-| `bestsellers_rank` | `int` | Bestseller ranking |
-| `categories` | `List<String>` | Book categories |
-| `edition` | `String` | Edition information |
-| `id` | `String` | Unique book identifier |
-| `isbn10` | `String` | ISBN-10 |
-| `isbn13` | `String` | ISBN-13 |
-| `rating_avg` | `float` | Average rating (0-5) |
-| `rating_count` | `int` | Number of ratings |
-| `title` | `String` | Book title |
-
-## 🔗 Related Links
-
-- [Kaggle Dataset](https://www.kaggle.com/sp1thas/book-depository-dataset)
-- [Kaggle API Documentation](https://www.kaggle.com/docs/api)
-- [Universidade Federal de Juiz de Fora](https://www.ufjf.br/)
-
----
-
-**Note:** This project is for academic purposes as part of the Data Structures II course at UFJF.
-
-## 📦 Generating and Running the JAR File
-
-### Generate JAR File via Terminal
-
-**Prerequisites:**
-- Java JDK 8 or higher
-- Maven 3.6 or higher
-
-**Generate JAR:**
-
-**Linux/Mac/Git Bash:**
-```bash
-mvn clean package && cp target/bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
-```
-
-**Windows PowerShell:**
 ```powershell
-mvn clean package; Copy-Item target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
+mvn -DskipTests package
 ```
 
-**Windows CMD:**
-```cmd
-mvn clean package && copy target\bookdepository-ds-analysis-jar-with-dependencies.jar bookdepository-ds-analysis.jar
+Run the experiments (the sorting experiment is the JAR's main class):
+
+```powershell
+# Sorting experiment (QuickSort vs. HeapSort)
+java -jar target/bookdepository-ds-analysis-jar-with-dependencies.jar
+
+# Hash table experiment (most frequent authors)
+java -cp target/bookdepository-ds-analysis-jar-with-dependencies.jar com.bookdepository.experiments.HashTableExperiment
 ```
 
-This creates `bookdepository-ds-analysis.jar` in the project root.
+Compile the LaTeX report locally (or let the `LaTeX` workflow build it on push):
 
-### Running Experiments
-
-**Part I: Sorting Algorithms**
-```bash
-java -jar bookdepository-ds-analysis.jar
+```powershell
+latexmk -pdf -cd docs/latex/relatorio.tex
 ```
 
-**Part II: Hash Tables**
-```bash
-java -cp bookdepository-ds-analysis.jar com.bookdepository.experiments.HashTableExperiment
+## Results
+
+Experiments write plain-text result blocks consumed by the report:
+
+- `output/output.txt` — per-size timing, comparison, and swap counts for QuickSort and HeapSort.
+- `output/outputPart2.txt` — ranked most-frequent authors with hash table collision and load-factor stats.
+
+The full written analysis, including the complexity charts, is in the compiled report produced from
+`docs/latex/relatorio.tex` (uploaded as the `relatorio-pdf` artifact by the `LaTeX` workflow).
+
+## Project structure
+
+```
+data-structures-analysis/
+├── src/
+│   ├── main/java/com/bookdepository/
+│   │   ├── algorithms/sorting/   # QuickSort, HeapSort
+│   │   ├── structures/           # bst, hashtable, linkedlist
+│   │   ├── experiments/          # SortingExperiment, HashTableExperiment
+│   │   ├── io/                   # FileReader, output writers, PerformanceResult
+│   │   └── model/                # Author, Record
+│   └── test/java/...             # JUnit 5 unit, integration, and JMH benchmark tests
+├── scripts/                      # Kaggle dataset downloader
+├── docs/latex/                   # LaTeX report sources
+├── checkstyle.xml
+├── pom.xml
+└── README.md
 ```
 
-**Part III: Tree Structures**
-```bash
-java -cp bookdepository-ds-analysis.jar com.bookdepository.experiments.TreeExperiment
-```
+## License
 
-**Requirements:**
-- Input file: `input/input.txt` with test sizes
-- Dataset files in `data/` directory (download via `scripts/download_dataset.py`)
-
-**Output files:**
-- `output/output.txt`: Sorting algorithm results
-- `output/outputPart2.txt`: Hash table results
-- `output/outputInsertion.txt`: Tree insertion results
-- `output/outputSearch.txt`: Tree search results
+Released under the [MIT License](LICENSE).
