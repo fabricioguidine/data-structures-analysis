@@ -20,7 +20,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 
 # Keep JAR in project root
 !bookdepository-ds-analysis.jar
@@ -114,6 +114,7 @@ TESTING.md
 TEST_IMPLEMENTATION_SUMMARY.md
 *.md
 !README.md
+!ARCHITECTURE.md
 
 # Build artifacts (keep JAR in dist/)
 *.class
